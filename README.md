@@ -1,6 +1,5 @@
 mato
 ====
 
-olio
-
-tää on paras olio-ohjelmoinnin harkkatyö
+Olio-ohjelmoinnin harjoitustyö
+- PM, AO
