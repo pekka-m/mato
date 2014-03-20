@@ -33,10 +33,22 @@ public class näyttö extends JPanel {
         this.y = y;
     }
 
-    @Override
+     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.white);
-        g.fillRect(x - 10, y - 10, 20, 20);
+        g.fillRect(x, y, 20, 20);
+        
+        g.setColor(Color.red);
+        g.fillOval(200, 100, 20, 20);
     }
+    
+      
+    public void sass (Graphics g) {
+        super.paintComponent(g);
+       
+        
+        g.setColor(Color.red);
+        g.fillOval(200, 100, 20, 20);
+}
 }

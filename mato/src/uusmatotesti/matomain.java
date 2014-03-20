@@ -24,16 +24,16 @@ public class matomain extends JFrame {
             public void keyPressed(KeyEvent e) {
 
                 if (e.getKeyCode() == 37) {
-                    näyttö.siirrä(-10, 0);
+                    näyttö.siirrä(-20, 0);
                 }
                 if (e.getKeyCode() == 38) {
-                    näyttö.siirrä(0, -10);
+                    näyttö.siirrä(0, -20);
                 }
                 if (e.getKeyCode() == 39) {
-                    näyttö.siirrä(10, 0);
+                    näyttö.siirrä(20, 0);
                 }
                 if (e.getKeyCode() == 40) {
-                    näyttö.siirrä(0, 10);
+                    näyttö.siirrä(0, 20);
                 }
             }
 
