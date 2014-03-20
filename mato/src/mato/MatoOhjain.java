@@ -16,6 +16,7 @@ public class MatoOhjain {
         MatoGUI näkymä = new MatoGUI();
         MatoOhjain ohjain = new MatoOhjain(malli, näkymä);
         näkymä.rekisteröiOhjain(ohjain);
+
     }
 }
 

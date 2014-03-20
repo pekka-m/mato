@@ -14,5 +14,6 @@ sisältää ominaisuudet jotka vaikuttavat pelin kulkuun, powerupit muokkaavat n
  * @author Aleksi
  */
 public class Ominaisuudet {
-    
+    private int pelialuex = 640;
+    private int pelialuey = 480;
 }
