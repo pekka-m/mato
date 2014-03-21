@@ -1,8 +1,13 @@
 package uusmatotesti;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 import javax.swing.*;
+import java.util.*;
 
 /**
  *
@@ -19,6 +24,11 @@ public class näyttö extends JPanel {
     private boolean törmäys;
     private JLabel ennätys;
     private int pisteet = 0;
+    
+    private int madonosat = 3;
+    private Map<Integer, Integer> matokoordinaatit = new HashMap<>();
+    
+    
 
     public näyttö() {
         setPreferredSize(new Dimension(borderx, bordery));
@@ -27,42 +37,43 @@ public class näyttö extends JPanel {
         y = 240;
         safkax = 200;
         safkay = 100;
-         ennätys = new JLabel();
+        ennätys = new JLabel();
         add(ennätys);
         ennätys.setText("pisteet: 0");
     }
 
     public boolean siirrä(int dx, int dy) {
 
-        if (x > borderx) { x -= 20; }
-        if (y > bordery) {y -= 20;}
-         if (x < 0) { x += 20; }
-        if (y < 0) {y += 20;}
+        if (x > borderx) {
+            x -= 20;
+        }
+        if (y > bordery) {
+            y -= 20;
+        }
+        if (x < 0) {
+            x += 20;
+        }
+        if (y < 0) {
+            y += 20;
+        }
 
 
         x += dx;
         y += dy;
+        
+        matokoordinaatit.put(x,y);
+        
 
 
         if ((x == safkax) & (y == safkay)) {
             this.törmäys = true;
-           
-            
-
-            
-            
-
         } else {
             this.törmäys = false;
         }
+   
 
-
-  
-        
         return törmäys;
-        
-        
-        
+
 
     }
 
@@ -86,13 +97,13 @@ public class näyttö extends JPanel {
         //   g.fillOval(safkax, safkay, 20, 20);
         this.repaint();
         siirrä(0, 0);
-         
+
 
         if (törmäys) {
             arpoja();
             g.fillRect(safkax, safkay, 20, 20);
-             this.pisteet += 1;
-            ennätys.setText("pisteet: " +pisteet );
+            this.pisteet += 1;
+            ennätys.setText("pisteet: " + pisteet);
         } else {
             g.fillRect(safkax, safkay, 20, 20);
             g.setColor(Color.CYAN);
@@ -102,7 +113,6 @@ public class näyttö extends JPanel {
 
     public void paintComponent2(Graphics g) {
         super.paintComponent(g);
-
 
         g.setColor(Color.red);
         g.fillOval(safkax, safkay, 20, 20);
