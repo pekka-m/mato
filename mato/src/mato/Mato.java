@@ -16,15 +16,15 @@ public class Mato {
 
     public Mato() {
         Graphics g;
-        g.drawRect(50, 50, 50, 50);
-        g.drawRect(50,50,50,50);
+   //     g.drawRect(50, 50, 50, 50);
+   //     g.drawRect(50,50,50,50);
     }
     
 
 
     public void TeeMato() {
         Graphics g;
-        g.drawRect(50, 50, 50, 50);
+   //     g.drawRect(50, 50, 50, 50);
     }
 }
 

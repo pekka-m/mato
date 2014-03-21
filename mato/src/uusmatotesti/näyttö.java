@@ -2,12 +2,8 @@ package uusmatotesti;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
 import javax.swing.*;
-import java.util.*;
 
 /**
  *
@@ -15,66 +11,155 @@ import java.util.*;
  */
 public class näyttö extends JPanel {
 
-    private int borderx = 650;
-    private int bordery = 490;
+    private final int borderx = 650;
+    private final int bordery = 490;
     private int x;
     private int y;
     private int safkax;
     private int safkay;
     private boolean törmäys;
-    private JLabel ennätys;
+    private boolean seinä;
+    private final JLabel ennätys;
     private int pisteet = 0;
+    private int madonpituus = 3;
+
+    // taulukoihin tallennetaan madon osien x ja y koordinaatit
+    private final ArrayList<Integer> madonosatx = new ArrayList<>();
+    private final ArrayList<Integer> madonosaty = new ArrayList<>();
+    private boolean vasenseinä;
+    private boolean yläseinä;
+    private boolean oikeaseinä;
+    private boolean alaseinä;
+
+    public boolean isVasenseinä() {
+        return vasenseinä;
+    }
+
+    public boolean isYläseinä() {
+        return yläseinä;
+    }
+
+    public boolean isOikeaseinä() {
+        return oikeaseinä;
+    }
+
+    public boolean isAlaseinä() {
+        return alaseinä;
+    }
     
-    private int madonosat = 3;
-    private Map<Integer, Integer> matokoordinaatit = new HashMap<>();
-    
-    
+
+    // pääohjelman puolelta kutsutaan näitä aina liikkumisen yhteydessä
+    // lisätään taulukoihin edelliset koordinaatit ennen liikkumista
+    // taulukoista poistetaan viimeiset koordinaatit (madon pituus)
+    public void addMadonosatx() {
+        this.madonosatx.add(0, x); // lisätään koordinaatit ensimmäiseen paikkaan, muut työntyy eteenpäin
+        if (madonosatx.size() == madonpituus) {
+            madonosatx.remove(madonpituus);
+        }
+    }
+
+    public void addMadonosaty() {
+        this.madonosaty.add(0, y);
+        if (madonosaty.size() == madonpituus) {
+            madonosaty.remove(madonpituus);
+        }
+    }
 
     public näyttö() {
         setPreferredSize(new Dimension(borderx, bordery));
         setBackground(Color.black);
         x = 320;
         y = 240;
-        safkax = 200;
-        safkay = 100;
+
+        // pelin alussa alustetaan madonosataulukon kaikki paikat
+        for (int i = 0; i < 3; i++) {
+            madonosatx.add(320);
+            madonosaty.add(240);
+        }
+
+        // arvotaan ensimmäinen safka
+        arpoja();
         ennätys = new JLabel();
         add(ennätys);
         ennätys.setText("pisteet: 0");
+
     }
 
-    public boolean siirrä(int dx, int dy) {
-
-        if (x > borderx) {
-            x -= 20;
+    public void siirrä(int dx, int dy) {
+        
+        // seinätörmäystunnistin ei toimi kunnolla
+        if (x == 0) {
+            vasenseinä = true;
         }
-        if (y > bordery) {
-            y -= 20;
+        if (y == 0) {
+            yläseinä = true;
         }
-        if (x < 0) {
-            x += 20;
+        if (x == 640) {
+            oikeaseinä = true;
         }
-        if (y < 0) {
-            y += 20;
+        if (y == 480) {
+            alaseinä = true;
         }
-
 
         x += dx;
         y += dy;
-        
-        matokoordinaatit.put(x,y);
-        
 
+//        if (x < borderx) {
+//            x -= 20;
+//        }
+//        if (y > bordery) {
+//            y -= 20;
+//        }
+//        if (x < 0) {
+//            x += 20;
+//        }
+//        if (y < 0) {
+//            y += 20;
+//        }
+        this.törmäys = (x == safkax) & (y == safkay);
+//        if (x < borderx && x > 0 && y < bordery && y > 0) {
+//            x += dx;
+//            y += dy;
+//            this.törmäys = (x == safkax) & (y == safkay);
+//        }
+    }
 
-        if ((x == safkax) & (y == safkay)) {
-            this.törmäys = true;
-        } else {
-            this.törmäys = false;
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.white);
+        g.fillRect(x, y, 20, 20);
+
+        if (this.x == 0) {
+            g.fillRect(0, 0, 40, 40);
         }
-   
 
-        return törmäys;
+        // piirretään madon osat, pituus muuttujasta madonpituus, koordinaatit taulukoista
+        for (int i = 0; i < madonpituus; i++) {
+            g.fillRect(madonosatx.get(i), madonosaty.get(i), 20, 20);
+        }
 
+        g.setColor(Color.red);
+        this.repaint();
 
+        if (törmäys) {
+            arpoja();
+            g.fillRect(safkax, safkay, 20, 20);
+            this.pisteet += 1;
+            ennätys.setText("pisteet: " + pisteet);
+            törmäys = false;
+
+            // aina safkatessa madon pituutta lisätään yhdellä
+            madonpituus++;
+        } else {
+            g.fillRect(safkax, safkay, 20, 20);
+        }
+    }
+
+    private void arpoja() {
+        Random arpoja = new Random();
+        this.safkax = arpoja.nextInt(31) * 20;
+        this.safkay = arpoja.nextInt(23) * 20;
     }
 
     public void setX(int x) {
@@ -85,46 +170,12 @@ public class näyttö extends JPanel {
         this.y = y;
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.white);
-        g.fillRect(x, y, 20, 20);
-
-
-        // this.paintComponent2(g);
-        g.setColor(Color.red);
-        //   g.fillOval(safkax, safkay, 20, 20);
-        this.repaint();
-        siirrä(0, 0);
-
-
-        if (törmäys) {
-            arpoja();
-            g.fillRect(safkax, safkay, 20, 20);
-            this.pisteet += 1;
-            ennätys.setText("pisteet: " + pisteet);
-        } else {
-            g.fillRect(safkax, safkay, 20, 20);
-            g.setColor(Color.CYAN);
-        }
-
+    // helpottaa koodin vääntämistä, output ikkunaan päivittyy madon koordinaatit
+    public int äksä() {
+        return this.x;
     }
 
-    public void paintComponent2(Graphics g) {
-        super.paintComponent(g);
-
-        g.setColor(Color.red);
-        g.fillOval(safkax, safkay, 20, 20);
-        this.repaint();
-    }
-
-    public void arpoja() {
-
-        Random arpoja = new Random();
-
-        this.safkax = arpoja.nextInt(31) * 20;
-        this.safkay = arpoja.nextInt(23) * 20;
-
+    public int yyyy() {
+        return this.y;
     }
 }
