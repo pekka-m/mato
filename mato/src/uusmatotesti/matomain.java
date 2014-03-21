@@ -9,6 +9,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 public class matomain extends JFrame {
 
     private näyttö näyttö;
+    private safka safka;
     private ActionListener kuuntelija;
 
     public matomain() {
@@ -17,6 +18,13 @@ public class matomain extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
+        
+       // safka= new safka();
+      //  add(safka);
+       // safka.setVisible(true);
+        
+       
+        
         pack();
 
         this.addKeyListener(new KeyListener() {
@@ -59,5 +67,6 @@ public class matomain extends JFrame {
 
     public static void main(String[] args) {
         new matomain();
+        
     }
 }
