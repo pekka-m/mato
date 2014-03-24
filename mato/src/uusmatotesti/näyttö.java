@@ -80,6 +80,7 @@ public class näyttö extends JPanel {
         // arvotaan ensimmäinen safka
         arpoja();
         ennätys = new JLabel();
+        
         add(ennätys);
         ennätys.setText("pisteet: 0");
 
@@ -129,6 +130,8 @@ public class näyttö extends JPanel {
         super.paintComponent(g);
         g.setColor(Color.white);
         g.fillRect(x, y, 20, 20);
+        g.fillRect(0, 0, 660, 10);
+       
 
         if (this.x == 0) {
             g.fillRect(0, 0, 40, 40);
