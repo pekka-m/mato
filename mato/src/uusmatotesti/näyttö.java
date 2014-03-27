@@ -9,7 +9,7 @@ import javax.swing.*;
  *
  * @author H3173
  */
-public class näyttö extends JPanel implements Runnable {
+public class näyttö extends JPanel implements Runnable  {
 
     private final int borderx = 690;
     private final int bordery = 530;
@@ -30,23 +30,6 @@ public class näyttö extends JPanel implements Runnable {
     private JLabel häviöteksti;
     private Thread thread;
     private Random arpoja = new Random();
-
-    // pääohjelman puolelta kutsutaan näitä aina liikkumisen yhteydessä
-    // lisätään taulukoihin edelliset koordinaatit ennen liikkumista
-    // taulukoista poistetaan viimeiset koordinaatit (madon pituus)
-    public void addMadonosatx() {
-        this.madonosatx.add(0, x); // lisätään koordinaatit ensimmäiseen paikkaan, muut työntyy eteenpäin
-        if (madonosatx.size() == madonpituus) {
-            madonosatx.remove(madonpituus);
-        }
-    }
-
-    public void addMadonosaty() {
-        this.madonosaty.add(0, y);
-        if (madonosaty.size() == madonpituus) {
-            madonosaty.remove(madonpituus);
-        }
-    }
 
     public näyttö() {
         setPreferredSize(new Dimension(borderx, bordery));
@@ -69,8 +52,8 @@ public class näyttö extends JPanel implements Runnable {
         add(ennätys);
         ennätys.setText("pisteet: 0");
 
-        thread = new Thread(this);
-        thread.start();
+       thread = new Thread(this);
+     thread.start();
 
     }
 
@@ -80,7 +63,6 @@ public class näyttö extends JPanel implements Runnable {
      * @param dy direction y
      */
     public void siirrä(int dx, int dy) {
-
         if (y == 20 && dy == -20) {
             if (seinä == false) {
                 System.out.println("HÄVISIT PELIN!");
@@ -106,12 +88,9 @@ public class näyttö extends JPanel implements Runnable {
             }
             seinä = true;
         }
-
         if (seinä == false) {
             // näytetään madon x ja y koordinaatit
-            System.out.print("x: " + äksä() + " ");
-            System.out.print("y: " + yyyy() + "\n");
-
+            
             // lisätään koordinaatit ensimmäiseen paikkaan, muut työntyy eteenpäin
             this.madonosatx.add(0, x);
             if (madonosatx.size() == madonpituus) {
@@ -121,13 +100,28 @@ public class näyttö extends JPanel implements Runnable {
             if (madonosaty.size() == madonpituus) {
                 madonosaty.remove(madonpituus);
             }
-
             this.dx = dx;
             this.dy = dy;
             // liikuttaa matoa
             x += dx;
             y += dy;
 
+            System.out.print("x: " + äksä() + " ");
+            System.out.print("y: " + yyyy() + "\n");
+            System.out.println(madonpituus);
+            
+            for (int i = 0; i < madonpituus; i++) {
+                 
+            System.out.println(madonosatx.get(i));
+            System.out.println(madonosaty.get(i));
+                
+                if ((madonosatx.get(i) == x) && (madonosaty.get(i) == y)) {
+                    System.out.println("Hävisit pelin!");
+                    seinä =true;
+                    hävisitTeksti();
+                }
+            }
+            
             //ollaanko törmätty safkaan
             this.törmäys = (x == safkax) & (y == safkay);
         }
@@ -139,7 +133,7 @@ public class näyttö extends JPanel implements Runnable {
             siirrä(dx, dy);
             repaint();
             try {
-                Thread.sleep(100);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
             }
         }
