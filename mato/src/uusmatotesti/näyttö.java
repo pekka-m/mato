@@ -46,7 +46,7 @@ public class näyttö extends JPanel {
 
     public näyttö() {
         setPreferredSize(new Dimension(borderx, bordery));
-        setBackground(Color.gray);
+        setBackground(Color.black);
         x = 320;
         y = 240;
 
