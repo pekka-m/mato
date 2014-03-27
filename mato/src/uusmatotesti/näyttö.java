@@ -22,11 +22,10 @@ public class näyttö extends JPanel {
     private final JLabel ennätys;
     private int pisteet = 0;
     private int madonpituus = 3;
-
     // taulukoihin tallennetaan madon osien x ja y koordinaatit
     private final ArrayList<Integer> madonosatx = new ArrayList<>();
     private final ArrayList<Integer> madonosaty = new ArrayList<>();
-    
+    private JLabel häviöteksti;
 
     // pääohjelman puolelta kutsutaan näitä aina liikkumisen yhteydessä
     // lisätään taulukoihin edelliset koordinaatit ennen liikkumista
@@ -47,7 +46,7 @@ public class näyttö extends JPanel {
 
     public näyttö() {
         setPreferredSize(new Dimension(borderx, bordery));
-        setBackground(Color.black);
+        setBackground(Color.gray);
         x = 320;
         y = 240;
 
@@ -58,48 +57,64 @@ public class näyttö extends JPanel {
         }
 
         // arvotaan ensimmäinen safka
+        
         arpoja();
         ennätys = new JLabel();
-        
+
         add(ennätys);
         ennätys.setText("pisteet: 0");
 
     }
 
     public void siirrä(int dx, int dy) {
-        // näytetään madon x ja y koordinaatit
-        System.out.print("x: " + äksä() + " ");
-        System.out.print("y: " + yyyy() + "\n");
-        
-        // lisätään koordinaatit ensimmäiseen paikkaan, muut työntyy eteenpäin
-        this.madonosatx.add(0, x);
-        if (madonosatx.size() == madonpituus) {
-            madonosatx.remove(madonpituus);
-        }
-        this.madonosaty.add(0, y);
-        if (madonosaty.size() == madonpituus) {
-            madonosaty.remove(madonpituus);
-        }
-        
         if (y == 20 && dy == -20) {
-            System.out.println("HÄVISIT PELIN!");
+            if (seinä == false) {
+                System.out.println("HÄVISIT PELIN!");
+                hävisitTeksti();
+            }
+            seinä = true;
+        } else if (x == 660 && dx == 20) {
+            if (seinä == false) {
+                System.out.println("HÄVISIT PELIN!");
+                hävisitTeksti();
+            }
+            seinä = true;
+        } else if (y == 500 && dy == 20) {
+            if (seinä == false) {
+                System.out.println("HÄVISIT PELIN!");
+                hävisitTeksti();
+            }
+            seinä = true;
+        } else if (x == 20 && dx == -20) {
+            if (seinä == false) {
+                System.out.println("HÄVISIT PELIN!");
+                hävisitTeksti();
+            }
+            seinä = true;
         }
-        else if (x == 660 && dx == 20) {
-            System.out.println("HÄVISIT PELIN!");
+
+        if (seinä == false) {
+            // näytetään madon x ja y koordinaatit
+            System.out.print("x: " + äksä() + " ");
+            System.out.print("y: " + yyyy() + "\n");
+
+            // lisätään koordinaatit ensimmäiseen paikkaan, muut työntyy eteenpäin
+            this.madonosatx.add(0, x);
+            if (madonosatx.size() == madonpituus) {
+                madonosatx.remove(madonpituus);
+            }
+            this.madonosaty.add(0, y);
+            if (madonosaty.size() == madonpituus) {
+                madonosaty.remove(madonpituus);
+            }
+
+            // liikuttaa matoa
+            x += dx;
+            y += dy;
+
+            //ollaanko törmätty safkaan
+            this.törmäys = (x == safkax) & (y == safkay);
         }
-        else if (y == 500 && dy == 20) {
-            System.out.println("HÄVISIT PELIN!");
-        }
-        else if (x == 20 && dx == -20) {
-            System.out.println("HÄVISIT PELIN!");
-        }
-        
-        // liikuttaa matoa
-        x += dx;
-        y += dy;
-        
-        //ollaanko törmätty safkaan
-        this.törmäys = (x == safkax) & (y == safkay);
     }
 
     @Override
@@ -111,8 +126,8 @@ public class näyttö extends JPanel {
         g.fillRect(0, 0, 20, 540);
         g.fillRect(680, 0, 20, 540);
         g.fillRect(0, 520, 700, 20);
-        
-       
+
+
 
         if (this.x == 0) {
             g.fillRect(0, 0, 40, 40);
@@ -144,6 +159,18 @@ public class näyttö extends JPanel {
         Random arpoja = new Random();
         this.safkax = arpoja.nextInt(31) * 20;
         this.safkay = arpoja.nextInt(23) * 20;
+    }
+    
+    private void hävisitTeksti() {
+        Font f = new Font("Dialog", Font.PLAIN, 24);
+        häviöteksti = new JLabel();
+        add(häviöteksti);
+        häviöteksti.setText("Hävisit pelin!");
+        häviöteksti.setSize(400, 100);
+        häviöteksti.setFont(f);
+        häviöteksti.setForeground(Color.red);
+//        häviöteksti.set
+        
     }
 
     public void setX(int x) {
