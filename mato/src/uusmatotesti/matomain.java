@@ -21,34 +21,16 @@ public class matomain extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == 37) {
-                    if (!näyttö.isVasenseinä()) {
-                        näyttö.siirrä(-20, 0);
-                        näyttö.addMadonosatx();
-                        näyttö.addMadonosaty();
-                        System.out.print("x: " + näyttö.äksä() + " ");
-                        System.out.print("y: " + näyttö.yyyy() + "\n");
-                    }
+                    näyttö.siirrä(-20, 0);
                 }
                 if (e.getKeyCode() == 38) {
                     näyttö.siirrä(0, -20);
-                    näyttö.addMadonosatx();
-                    näyttö.addMadonosaty();
-                    System.out.print("x: " + näyttö.äksä() + " ");
-                    System.out.print("y: " + näyttö.yyyy() + "\n");
                 }
                 if (e.getKeyCode() == 39) {
                     näyttö.siirrä(20, 0);
-                    näyttö.addMadonosatx();
-                    näyttö.addMadonosaty();
-                    System.out.print("x: " + näyttö.äksä() + " ");
-                    System.out.print("y: " + näyttö.yyyy() + "\n");
                 }
                 if (e.getKeyCode() == 40) {
                     näyttö.siirrä(0, 20);
-                    näyttö.addMadonosatx();
-                    näyttö.addMadonosaty();
-                    System.out.print("x: " + näyttö.äksä() + " ");
-                    System.out.print("y: " + näyttö.yyyy() + "\n");
                 }
             }
 

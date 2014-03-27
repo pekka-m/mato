@@ -11,8 +11,8 @@ import javax.swing.*;
  */
 public class näyttö extends JPanel {
 
-    private final int borderx = 650;
-    private final int bordery = 490;
+    private final int borderx = 690;
+    private final int bordery = 530;
     private int x;
     private int y;
     private int safkax;
@@ -26,26 +26,6 @@ public class näyttö extends JPanel {
     // taulukoihin tallennetaan madon osien x ja y koordinaatit
     private final ArrayList<Integer> madonosatx = new ArrayList<>();
     private final ArrayList<Integer> madonosaty = new ArrayList<>();
-    private boolean vasenseinä;
-    private boolean yläseinä;
-    private boolean oikeaseinä;
-    private boolean alaseinä;
-
-    public boolean isVasenseinä() {
-        return vasenseinä;
-    }
-
-    public boolean isYläseinä() {
-        return yläseinä;
-    }
-
-    public boolean isOikeaseinä() {
-        return oikeaseinä;
-    }
-
-    public boolean isAlaseinä() {
-        return alaseinä;
-    }
     
 
     // pääohjelman puolelta kutsutaan näitä aina liikkumisen yhteydessä
@@ -87,42 +67,39 @@ public class näyttö extends JPanel {
     }
 
     public void siirrä(int dx, int dy) {
+        // näytetään madon x ja y koordinaatit
+        System.out.print("x: " + äksä() + " ");
+        System.out.print("y: " + yyyy() + "\n");
         
-        // seinätörmäystunnistin ei toimi kunnolla
-        if (x == 0) {
-            vasenseinä = true;
+        // lisätään koordinaatit ensimmäiseen paikkaan, muut työntyy eteenpäin
+        this.madonosatx.add(0, x);
+        if (madonosatx.size() == madonpituus) {
+            madonosatx.remove(madonpituus);
         }
-        if (y == 0) {
-            yläseinä = true;
+        this.madonosaty.add(0, y);
+        if (madonosaty.size() == madonpituus) {
+            madonosaty.remove(madonpituus);
         }
-        if (x == 640) {
-            oikeaseinä = true;
+        
+        if (y == 20 && dy == -20) {
+            System.out.println("HÄVISIT PELIN!");
         }
-        if (y == 480) {
-            alaseinä = true;
+        else if (x == 660 && dx == 20) {
+            System.out.println("HÄVISIT PELIN!");
         }
-
+        else if (y == 500 && dy == 20) {
+            System.out.println("HÄVISIT PELIN!");
+        }
+        else if (x == 20 && dx == -20) {
+            System.out.println("HÄVISIT PELIN!");
+        }
+        
+        // liikuttaa matoa
         x += dx;
         y += dy;
-
-//        if (x < borderx) {
-//            x -= 20;
-//        }
-//        if (y > bordery) {
-//            y -= 20;
-//        }
-//        if (x < 0) {
-//            x += 20;
-//        }
-//        if (y < 0) {
-//            y += 20;
-//        }
+        
+        //ollaanko törmätty safkaan
         this.törmäys = (x == safkax) & (y == safkay);
-//        if (x < borderx && x > 0 && y < bordery && y > 0) {
-//            x += dx;
-//            y += dy;
-//            this.törmäys = (x == safkax) & (y == safkay);
-//        }
     }
 
     @Override
@@ -130,7 +107,11 @@ public class näyttö extends JPanel {
         super.paintComponent(g);
         g.setColor(Color.white);
         g.fillRect(x, y, 20, 20);
-        g.fillRect(0, 0, 660, 10);
+        g.fillRect(0, 0, 700, 20); // yläseinä
+        g.fillRect(0, 0, 20, 540);
+        g.fillRect(680, 0, 20, 540);
+        g.fillRect(0, 520, 700, 20);
+        
        
 
         if (this.x == 0) {
