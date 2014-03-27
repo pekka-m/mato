@@ -9,12 +9,14 @@ import javax.swing.*;
  *
  * @author H3173
  */
-public class näyttö extends JPanel {
+public class näyttö extends JPanel implements Runnable {
 
     private final int borderx = 690;
     private final int bordery = 530;
     private int x;
     private int y;
+    private int dx;
+    private int dy;
     private int safkax;
     private int safkay;
     private boolean törmäys;
@@ -26,6 +28,8 @@ public class näyttö extends JPanel {
     private final ArrayList<Integer> madonosatx = new ArrayList<>();
     private final ArrayList<Integer> madonosaty = new ArrayList<>();
     private JLabel häviöteksti;
+    private Thread thread;
+    private Random arpoja = new Random();
 
     // pääohjelman puolelta kutsutaan näitä aina liikkumisen yhteydessä
     // lisätään taulukoihin edelliset koordinaatit ennen liikkumista
@@ -55,18 +59,28 @@ public class näyttö extends JPanel {
             madonosatx.add(320);
             madonosaty.add(240);
         }
+        SuunnanArpoja();
 
         // arvotaan ensimmäinen safka
-        
+
         arpoja();
         ennätys = new JLabel();
 
         add(ennätys);
         ennätys.setText("pisteet: 0");
 
+        thread = new Thread(this);
+        thread.start();
+
     }
 
+    /**
+     *
+     * @param dx direction x
+     * @param dy direction y
+     */
     public void siirrä(int dx, int dy) {
+
         if (y == 20 && dy == -20) {
             if (seinä == false) {
                 System.out.println("HÄVISIT PELIN!");
@@ -108,6 +122,8 @@ public class näyttö extends JPanel {
                 madonosaty.remove(madonpituus);
             }
 
+            this.dx = dx;
+            this.dy = dy;
             // liikuttaa matoa
             x += dx;
             y += dy;
@@ -115,6 +131,19 @@ public class näyttö extends JPanel {
             //ollaanko törmätty safkaan
             this.törmäys = (x == safkax) & (y == safkay);
         }
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            siirrä(dx, dy);
+            repaint();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+            }
+        }
+
     }
 
     @Override
@@ -156,11 +185,33 @@ public class näyttö extends JPanel {
     }
 
     private void arpoja() {
-        Random arpoja = new Random();
+
         this.safkax = arpoja.nextInt(31) * 20;
         this.safkay = arpoja.nextInt(23) * 20;
     }
-    
+
+    private void SuunnanArpoja() {
+        int suunta = arpoja.nextInt(4);
+
+        //oikea
+        if (suunta == 0) {
+            siirrä(20, 0);
+        }
+        //vasen
+        if (suunta == 1) {
+            siirrä(-20, 0);
+        }
+        //ylös
+        if (suunta == 2) {
+            siirrä(0, -20);
+        }
+        //alas
+        if (suunta == 3) {
+            siirrä(0, 20);
+        }
+
+    }
+
     private void hävisitTeksti() {
         Font f = new Font("Dialog", Font.PLAIN, 24);
         häviöteksti = new JLabel();
@@ -170,7 +221,7 @@ public class näyttö extends JPanel {
         häviöteksti.setFont(f);
         häviöteksti.setForeground(Color.red);
 //        häviöteksti.set
-        
+
     }
 
     public void setX(int x) {
