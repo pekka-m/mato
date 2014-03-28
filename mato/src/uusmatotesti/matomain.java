@@ -13,10 +13,14 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  */
 public class matomain extends JFrame {
 
-    private näyttö näyttö;
-
+//    näyttö näyttö = new näyttö();
+//    private näyttö näyttö;
+    
+    
+    näyttö näyttö = new näyttö();
+//    Mato mato = new Mato();
     public matomain() {
-        näyttö = new näyttö();
+        
         add(näyttö, BorderLayout.CENTER);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -26,16 +30,16 @@ public class matomain extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == 37) {
-                    näyttö.setSuunta("vasen");
+                    näyttö.siirräSuunta("vasen");
                 }
                 if (e.getKeyCode() == 38) {
-                    näyttö.setSuunta("ylos");
+                    näyttö.siirräSuunta("ylos");
                 }
                 if (e.getKeyCode() == 39) {
-                    näyttö.setSuunta("oikea");
+                    näyttö.siirräSuunta("oikea");
                 }
                 if (e.getKeyCode() == 40) {
-                    näyttö.setSuunta("alas");
+                    näyttö.siirräSuunta("alas");
                 }
             }
 
@@ -52,6 +56,6 @@ public class matomain extends JFrame {
     }
 
     public static void main(String[] args) {
-        new matomain();
+        matomain matomain = new matomain();
     }
 }
