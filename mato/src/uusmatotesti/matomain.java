@@ -5,7 +5,12 @@ import java.awt.*;
 import java.awt.event.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
-/* @author H3173 */
+/**
+ * MATO
+ * @version 0.51
+ * @author Pekka M, Aleksi O
+ * @since 2014-03-07
+ */
 public class matomain extends JFrame {
 
     private näyttö näyttö;
@@ -21,16 +26,16 @@ public class matomain extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == 37) {
-                    näyttö.siirrä(-20, 0);
+                    näyttö.setSuunta("vasen");
                 }
                 if (e.getKeyCode() == 38) {
-                    näyttö.siirrä(0, -20);
+                    näyttö.setSuunta("ylos");
                 }
                 if (e.getKeyCode() == 39) {
-                    näyttö.siirrä(20, 0);
+                    näyttö.setSuunta("oikea");
                 }
                 if (e.getKeyCode() == 40) {
-                    näyttö.siirrä(0, 20);
+                    näyttö.setSuunta("alas");
                 }
             }
 
