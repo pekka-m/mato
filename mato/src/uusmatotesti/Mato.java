@@ -10,6 +10,7 @@ import java.util.Random;
 public class Mato {
 
 //    näyttö näyttö = new näyttö();
+     Safka safka = new Safka();
     private HävisitTeksti häviöteksti = new HävisitTeksti();
     private ArrayList<Integer> madonosatx = new ArrayList<>();
     private ArrayList<Integer> madonosaty = new ArrayList<>();
@@ -26,6 +27,33 @@ public class Mato {
     private Random arpoja = new Random();
     private boolean seinä = false;
     private boolean törmäys = false;
+    private int safkax;
+    private int safkay;
+
+    public void setSafkax() {
+        this.safkax = safka.getSafkax();
+        
+    }
+
+    public int getSafkax() {
+        return safkax;
+    }
+
+    public int getSafkay() {
+        return safkay;
+    }
+
+    public void setSafkay() {
+        this.safkay = safka.getSafkay();
+        
+    }
+    
+   public void getArpoja(){
+       safka.safkaArpoja();
+       
+   }
+    
+ 
     
     public Mato() {
         this.x = 320;
@@ -71,12 +99,6 @@ public class Mato {
         System.out.println(this.suunta);
     }
 
-    
-    
-    
-    
-    
-    
     public void lisääMadonKoordinaatit() {
         // lisätään koordinaatit ensimmäiseen paikkaan, muut työntyy eteenpäin
         this.madonosatx.add(0, this.x);
@@ -94,20 +116,6 @@ public class Mato {
         this.tokavikax = this.madonosatx.get(this.madonpituus - 2);
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     public void siirrä() {
         
         if (this.y == 20 && this.dy == -20) {
@@ -184,7 +192,7 @@ public class Mato {
             }
 
             //ollaanko törmätty safkaan SAFKASTA TEHDÄÄN OMA LUOKKA
-         //   this.törmäys = (this.x == näyttö.getSafkax()) & (this.y == näyttö.getSafkay());
+            this.törmäys = (this.x == safka.getSafkax()) & (this.y == safka.getSafkay());
         }
     }
 

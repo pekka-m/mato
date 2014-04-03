@@ -13,12 +13,10 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  */
 public class matomain extends JFrame {
 
-//    näyttö näyttö = new näyttö();
-//    private näyttö näyttö;
+
     
     
     näyttö näyttö = new näyttö();
-//    Mato mato = new Mato();
     public matomain() {
         
         add(näyttö, BorderLayout.CENTER);

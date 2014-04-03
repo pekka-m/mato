@@ -8,7 +8,7 @@ import javax.swing.*;
  *
  * @author H3173
  */
-public class Safka {
+public class Safka{
     
     private int safkax;
     private int safkay;
@@ -16,20 +16,25 @@ public class Safka {
     
     public Safka() {
         safkaArpoja();
+/*
+        super.setSafkax(this.safkax);
+        super.setSafkay(this.safkay);
+ */
     }
 
     public void safkaArpoja() {
 
-        this.safkax = arpoja.nextInt(31) * 20 + 20;
-        this.safkay = arpoja.nextInt(23) * 20 + 20;
+        this.safkax = this.arpoja.nextInt(31) * 20 + 20;
+        this.safkay = this.arpoja.nextInt(23) * 20 + 20;
+        
     }
     
     public int getSafkax() {
-        return safkax;
+        return this.safkax;
     }
 
     public int getSafkay() {
-        return safkay;
+        return this.safkay;
     }
 
     public void setSafkax(int safkax) {
@@ -39,7 +44,5 @@ public class Safka {
     public void setSafkay(int safkay) {
         this.safkay = safkay;
     }
-    
-    
 
 }
