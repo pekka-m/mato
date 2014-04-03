@@ -1,43 +1,49 @@
 package uusmatotesti;
 
-import java.util.Random;
+import java.awt.*;
+import javax.swing.*;
 
 /**
  *
  * @author H3173
  */
-public class Safka {
+public class safka extends JComponent {
+
+    private int x;
+    private int y;
+
+    public safka() {
+       setPreferredSize(new Dimension(640, 480));
+        setBackground(Color.black);
+        x = 320;
+        y = 240;
+    }
+
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+     
+
     
-    private int safkax;
-    private int safkay;
-    private Random arpoja = new Random();
-    
-    public Safka() {
-        safkaArpoja();
-    }
-
-    public void safkaArpoja() {
-
-        this.safkax = arpoja.nextInt(31) * 20 + 20;
-        this.safkay = arpoja.nextInt(23) * 20 + 20;
-    }
-    
-    public int getSafkax() {
-        return safkax;
-    }
-
-    public int getSafkay() {
-        return safkay;
-    }
-
-    public void setSafkax(int safkax) {
-        this.safkax = safkax;
-    }
-
-    public void setSafkay(int safkay) {
-        this.safkay = safkay;
-    }
-    
-    
-
+      
+    @Override
+    public void paintComponent (Graphics g) {
+        super.paintComponent(g);
+       
+        
+        g.setColor(Color.red);
+        g.fillOval(200, 100, x, y);
+       this.repaint();
 }
+}
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */

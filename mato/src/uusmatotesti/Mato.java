@@ -7,7 +7,7 @@ import java.util.Random;
  *
  * @author H3173
  */
-public class Mato extends näyttö{
+public class Mato {
 
 //    näyttö näyttö = new näyttö();
     private HävisitTeksti häviöteksti = new HävisitTeksti();
@@ -164,13 +164,7 @@ public class Mato extends näyttö{
             }
 
             //ollaanko törmätty safkaan SAFKASTA TEHDÄÄN OMA LUOKKA
-            this.törmäys = (this.x == super.haeSafkaX()) & (this.y == super.haeSafkaY());
-            
-            if (this.x == super.haeSafkaX() && this.y == super.haeSafkaY()) {
-                System.out.println("TÖRMÄYS SAFKAAN!!!");
-            }
-            
-            
+           // this.törmäys = (this.x == näyttö.getSafkax()) & (this.y == näyttö.getSafkay());
         }
     }
 
