@@ -71,6 +71,12 @@ public class Mato {
         System.out.println(this.suunta);
     }
 
+    
+    
+    
+    
+    
+    
     public void lisääMadonKoordinaatit() {
         // lisätään koordinaatit ensimmäiseen paikkaan, muut työntyy eteenpäin
         this.madonosatx.add(0, this.x);
@@ -88,6 +94,20 @@ public class Mato {
         this.tokavikax = this.madonosatx.get(this.madonpituus - 2);
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public void siirrä() {
         
         if (this.y == 20 && this.dy == -20) {
@@ -164,7 +184,7 @@ public class Mato {
             }
 
             //ollaanko törmätty safkaan SAFKASTA TEHDÄÄN OMA LUOKKA
-           // this.törmäys = (this.x == näyttö.getSafkax()) & (this.y == näyttö.getSafkay());
+         //   this.törmäys = (this.x == näyttö.getSafkax()) & (this.y == näyttö.getSafkay());
         }
     }
 
