@@ -166,7 +166,9 @@ public class Mato extends näyttö{
             //ollaanko törmätty safkaan SAFKASTA TEHDÄÄN OMA LUOKKA
             this.törmäys = (this.x == super.haeSafkaX()) & (this.y == super.haeSafkaY());
             
-            
+            if (this.x == super.haeSafkaX() && this.y == super.haeSafkaY()) {
+                System.out.println("TÖRMÄYS SAFKAAN!!!");
+            }
             
             
         }
