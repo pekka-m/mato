@@ -1,5 +1,6 @@
 package uusmatotesti;
 
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -301,6 +302,12 @@ public class Mato {
 
     public void setMadonosaty(ArrayList<Integer> madonosaty) {
         this.madonosaty = madonosaty;
+    }
+    
+    public void Restarttti(){
+  
+     
+        
     }
     
     

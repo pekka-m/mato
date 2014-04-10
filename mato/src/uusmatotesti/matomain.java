@@ -40,7 +40,19 @@ this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize()
                 if (e.getKeyCode() == 40) {
                     näyttö.siirräSuunta("alas");
                 }
+                   if (e.getKeyCode() == 82) {
+                       dispose();
+                       new matomain();
+                  
+                }
+                      if (e.getKeyCode() == 114) {
+                          dispose();
+                         new matomain(); 
+                 
+                }
+               
             }
+              
 
             @Override
             public void keyTyped(KeyEvent e) {
