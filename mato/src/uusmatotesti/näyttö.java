@@ -20,174 +20,30 @@ public class näyttö extends JPanel implements Runnable{
     private final int bordery = 530;
     private int x;
     private int y;
-    private int dx;
-    private int dy;
-    private int safkax;
     private String suunta;
-    private int safkay;
-    /*
-    public void setSafkax(int safkax) {
-        this.safkax = safkax;
-    }
-    public void setSafkay(int safkay) {
-        this.safkay = safkay;
-    }
-   */ 
     private int pisteet = 0;
     private JLabel häviöteksti;
     private JLabel ennätys;
     private Thread thread;
-    private Random arpoja = new Random();
 
-    /**
-     * Tällä vaihdetaan madon suuntaa
-     *
-     * @param suunta vasen, oikea, ylös, alas
-     */
-    /*
-     public void setSuunta(String suunta) {
-     if ("ylos".equals(this.suunta) && "alas".equals(suunta)) {
-     this.suunta = "ylos";
-     } else if ("oikea".equals(this.suunta) && "vasen".equals(suunta)) {
-     this.suunta = "oikea";
-     } else if ("alas".equals(this.suunta) && "ylos".equals(suunta)) {
-     this.suunta = "alas";
-     } else if ("vasen".equals(this.suunta) && "oikea".equals(suunta)) {
-     this.suunta = "vasen";
-     } else {
-     this.suunta = suunta;
-     }
-     }
-     */
     public näyttö() {
         setPreferredSize(new Dimension(borderx, bordery));
         setBackground(Color.black);
-//        Mato mato = new Mato();
-        /*
-         // pelin alussa alustetaan madonosataulukon kaikki paikat
-         for (int i = 0; i < madonpituus; i++) {
-         madonosatx.add(320);
-         madonosaty.add(240);
-         }
-         vikay = madonosaty.get(madonpituus - 1);
-         tokavikay = madonosaty.get(madonpituus - 2);
-         vikax = madonosatx.get(madonpituus - 1);
-         tokavikax = madonosatx.get(madonpituus - 2);
-         SuunnanArpoja();
-         */
-        // arvotaan ensimmäinen safka
-        safkaArpoja();
-        ennätys = new JLabel();
 
+        ennätys = new JLabel();
         add(ennätys);
         ennätys.setForeground(Color.white);
         ennätys.setText("pisteet: 0");
 
-
         thread = new Thread(this);
-        thread.start();
-
-
-        
+        thread.start(); 
     }
 
     public void siirräSuunta(String suunta) {
         this.suunta = suunta;
         mato.setSuunta(suunta);
     }
-    
-    /**
-     *
-     * @param dx direction x
-     * @param dy direction y
-     */
-    /*
-     public void siirrä() {
-     if (y == 20 && dy == -20) {
-     if (seinä == false) {
-     System.out.println("HÄVISIT PELIN!");
-     hävisitTeksti();
-     }
-     seinä = true;
-     } else if (x == 660 && dx == 20) {
-     if (seinä == false) {
-     System.out.println("HÄVISIT PELIN!");
-     hävisitTeksti();
-     }
-     seinä = true;
-     } else if (y == 500 && dy == 20) {
-     if (seinä == false) {
-     System.out.println("HÄVISIT PELIN!");
-     hävisitTeksti();
-     }
-     seinä = true;
-     } else if (x == 20 && dx == -20) {
-     if (seinä == false) {
-     System.out.println("HÄVISIT PELIN!");
-     hävisitTeksti();
-     }
-     seinä = true;
-     }
-     if (seinä == false) {
-     // näytetään madon x ja y koordinaatit
 
-     // lisätään koordinaatit ensimmäiseen paikkaan, muut työntyy eteenpäin
-     this.madonosatx.add(0, x);
-     if (madonosatx.size() == madonpituus) {
-     madonosatx.remove(madonpituus);
-     }
-     this.madonosaty.add(0, y);
-     if (madonosaty.size() == madonpituus) {
-     madonosaty.remove(madonpituus);
-     }
-     vikay = madonosaty.get(madonpituus - 1);
-     tokavikay = madonosaty.get(madonpituus - 2);
-     vikax = madonosatx.get(madonpituus - 1);
-     tokavikax = madonosatx.get(madonpituus - 2);
-     switch (suunta) {
-     case "vasen":
-     this.dx = -20;
-     this.dy = 0;
-     break;
-     case "ylos":
-     this.dx = 0;
-     this.dy = -20;
-     break;
-     case "oikea":
-     this.dx = 20;
-     this.dy = 0;
-     break;
-     case "alas":
-     this.dx = 0;
-     this.dy = 20;
-     break;
-     }
-
-     // liikuttaa matoa
-     x += dx;
-     y += dy;
-
-     System.out.print("x: " + äksä() + " ");
-     System.out.print("y: " + yyyy() + "\n");
-     System.out.println(madonpituus);
-
-     for (int i = 0; i < madonpituus; i++) {
-
-     System.out.println(madonosatx.get(i));
-     System.out.println(madonosaty.get(i));
-
-     if ((madonosatx.get(i) == x) && (madonosaty.get(i) == y)) {
-     System.out.println("Hävisit pelin!");
-     seinä = true;
-     hävisitTeksti();
-     }
-     }
-
-     //ollaanko törmätty safkaan
-     this.törmäys = (x == safkax) & (y == safkay);
-     }
-     }
-     */
     @Override
     public void run() {
         while (true) {
@@ -198,7 +54,6 @@ public class näyttö extends JPanel implements Runnable{
             } catch (InterruptedException e) {
             }
         }
-
     }
     @Override
     public void paintComponent(Graphics g) {
@@ -275,32 +130,6 @@ public class näyttö extends JPanel implements Runnable{
 
     }
 
-    private void safkaArpoja() {
-
-        this.safkax = arpoja.nextInt(31) * 20 + 20;
-        this.safkay = arpoja.nextInt(23) * 20 + 20;
-    }
-    /*
-     private void SuunnanArpoja() {
-     int suuntarng = arpoja.nextInt(4);
-
-     //oikea
-     if (suuntarng == 0) {
-     suunta = "vasen";
-     } //vasen
-     else if (suuntarng == 1) {
-     suunta = "ylös";
-     } //ylös
-     else if (suuntarng == 2) {
-     suunta = "oikea";
-     } //alas
-     else if (suuntarng == 3) {
-     suunta = "alas";
-     }
-
-     }
-     */
-
     public void hävisitTeksti() {
         Font f = new Font("Dialog", Font.PLAIN, 24);
         häviöteksti = new JLabel();
@@ -311,14 +140,6 @@ public class näyttö extends JPanel implements Runnable{
         häviöteksti.setForeground(Color.red);
 //        häviöteksti.set
 
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     // helpottaa koodin vääntämistä, output ikkunaan päivittyy madon koordinaatit

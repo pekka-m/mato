@@ -1,8 +1,6 @@
 package uusmatotesti;
 
-import java.awt.*;
 import java.util.Random;
-import javax.swing.*;
 
 /**
  *
@@ -16,10 +14,6 @@ public class Safka{
     
     public Safka() {
         safkaArpoja();
-/*
-        super.setSafkax(this.safkax);
-        super.setSafkay(this.safkay);
- */
     }
 
     public void safkaArpoja() {

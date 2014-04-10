@@ -117,26 +117,25 @@ public class Mato {
     }
 
     public void siirrä() {
-        
-        if (this.y == 20 && this.dy == -20) {
+        if (this.y == 0) {
             if (this.seinä == false) {
                 System.out.println("HÄVISIT PELIN!");
                    häviöteksti.hävisitTeksti();
             }
             this.seinä = true;
-        } else if (this.x == 660 && this.dx == 20) {
+        } else if (this.x == 680) {
             if (this.seinä == false) {
                 System.out.println("HÄVISIT PELIN!");
                     häviöteksti.hävisitTeksti();
             }
             this.seinä = true;
-        } else if (this.y == 500 && this.dy == 20) {
+        } else if (this.y == 520) {
             if (this.seinä == false) {
                 System.out.println("HÄVISIT PELIN!");
                     häviöteksti.hävisitTeksti();
             }
             this.seinä = true;
-        } else if (this.x == 20 && this.dx == -20) {
+        } else if (this.x == 0) {
             if (this.seinä == false) {
                 System.out.println("HÄVISIT PELIN!");
                     häviöteksti.hävisitTeksti();
