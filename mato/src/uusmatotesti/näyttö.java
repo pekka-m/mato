@@ -6,37 +6,41 @@ import java.util.Random;
 import javax.swing.*;
 
 /**
- *  MATO
+ * MATO
  *
  * @version 0.51
  * @author Pekka M, Aleksi O
  * @since 2014-03-07
  */
-public class näyttö extends JPanel implements Runnable{
+public class näyttö extends JPanel implements Runnable {
 
     Mato mato = new Mato();
-   
     private final int borderx = 700;
     private final int bordery = 540;
     private int x;
     private int y;
     private String suunta;
     private int pisteet = 0;
-    private JLabel häviöteksti;
     private JLabel ennätys;
     private Thread thread;
+    private JLabel hävisit;
 
     public näyttö() {
         setPreferredSize(new Dimension(borderx, bordery));
         setBackground(Color.black);
+        setLayout(new FlowLayout(FlowLayout.CENTER));
+
+
 
         ennätys = new JLabel();
         add(ennätys);
         ennätys.setForeground(Color.white);
         ennätys.setText("pisteet: 0");
 
+
+
         thread = new Thread(this);
-        thread.start(); 
+        thread.start();
     }
 
     public void siirräSuunta(String suunta) {
@@ -48,6 +52,7 @@ public class näyttö extends JPanel implements Runnable{
     public void run() {
         while (true) {
             mato.siirrä();
+
             repaint();
             try {
                 Thread.sleep(75);
@@ -55,12 +60,11 @@ public class näyttö extends JPanel implements Runnable{
             }
         }
     }
+
     @Override
     public void paintComponent(Graphics g) {
         // mahdollisesti affinetransform juttua käytetään kuvan kääntämiseen
         super.paintComponent(g);
-        g.setColor(Color.red);
-        g.fillRect(40, 40, 40, 40);
         // madon pää
         if (mato.getDx() == 20 && mato.getDy() == 0) {
             Image madonpää = Toolkit.getDefaultToolkit().getImage("madonpaa-oikea.png");
@@ -108,7 +112,22 @@ public class näyttö extends JPanel implements Runnable{
             }
         }
 
-        this.repaint();
+        if (mato.isSeinä() == true) {
+
+            g.setFont(new Font("Dialog", Font.PLAIN, 48));
+            g.setColor(Color.red);
+            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+
+            g.drawString("hävisit", 250, 250);
+
+            g.setFont(new Font("Dialog", Font.PLAIN, 22));
+            g.drawString("press R to restart", 250, 280);
+
+
+        }
+
+
+
 
         Image apple = Toolkit.getDefaultToolkit().getImage("apple.png");
         mato.isTörmäys();
@@ -127,19 +146,7 @@ public class näyttö extends JPanel implements Runnable{
         } else {
             g.drawImage(apple, mato.getSafkax(), mato.getSafkay(), null);
         }
-
-    }
-
-    public void hävisitTeksti() {
-        Font f = new Font("Dialog", Font.PLAIN, 24);
-        häviöteksti = new JLabel();
-        add(häviöteksti);
-        häviöteksti.setText("Hävisit pelin!");
-        häviöteksti.setSize(400, 100);
-        häviöteksti.setFont(f);
-        häviöteksti.setForeground(Color.red);
-//        häviöteksti.set
-
+        this.repaint();
     }
 
     // helpottaa koodin vääntämistä, output ikkunaan päivittyy madon koordinaatit

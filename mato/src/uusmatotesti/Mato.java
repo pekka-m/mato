@@ -11,8 +11,7 @@ import java.util.Random;
 public class Mato {
 
 //    näyttö näyttö = new näyttö();
-     Safka safka = new Safka();
-    private HävisitTeksti häviöteksti = new HävisitTeksti();
+    Safka safka = new Safka();
     private ArrayList<Integer> madonosatx = new ArrayList<>();
     private ArrayList<Integer> madonosaty = new ArrayList<>();
     private int madonpituus = 3;
@@ -33,11 +32,15 @@ public class Mato {
 
     public void setSafkax() {
         this.safkax = safka.getSafkax();
-        
+
     }
 
     public int getSafkax() {
         return safkax;
+    }
+
+    public boolean isSeinä() {
+        return seinä;
     }
 
     public int getSafkay() {
@@ -46,16 +49,14 @@ public class Mato {
 
     public void setSafkay() {
         this.safkay = safka.getSafkay();
-        
+
     }
-    
-   public void getArpoja(){
-       safka.safkaArpoja();
-       
-   }
-    
- 
-    
+
+    public void getArpoja() {
+        safka.safkaArpoja();
+
+    }
+
     public Mato() {
         this.x = 320;
         this.y = 240;
@@ -119,28 +120,13 @@ public class Mato {
 
     public void siirrä() {
         if (this.y == 0) {
-            if (this.seinä == false) {
-                System.out.println("HÄVISIT PELIN!");
-                   häviöteksti.hävisitTeksti();
-            }
+
             this.seinä = true;
         } else if (this.x == 680) {
-            if (this.seinä == false) {
-                System.out.println("HÄVISIT PELIN!");
-                    häviöteksti.hävisitTeksti();
-            }
             this.seinä = true;
         } else if (this.y == 520) {
-            if (this.seinä == false) {
-                System.out.println("HÄVISIT PELIN!");
-                    häviöteksti.hävisitTeksti();
-            }
             this.seinä = true;
         } else if (this.x == 0) {
-            if (this.seinä == false) {
-                System.out.println("HÄVISIT PELIN!");
-                    häviöteksti.hävisitTeksti();
-            }
             this.seinä = true;
         }
         if (this.seinä == false) {
@@ -187,7 +173,6 @@ public class Mato {
                 if ((this.madonosatx.get(i) == this.x) && (this.madonosaty.get(i) == this.y)) {
                     System.out.println("Hävisit pelin!");
                     this.seinä = true;
-                        häviöteksti.hävisitTeksti();
                 }
             }
 
@@ -199,7 +184,7 @@ public class Mato {
     public String getSuunta() {
         return suunta;
     }
-    
+
     public int getMadonpituus() {
         return madonpituus;
     }
@@ -271,7 +256,7 @@ public class Mato {
     public void setDy(int dy) {
         this.dy = dy;
     }
-    
+
     public boolean isTörmäys() {
         return törmäys;
     }
@@ -279,7 +264,7 @@ public class Mato {
     public void setTörmäys(boolean törmäys) {
         this.törmäys = törmäys;
     }
-    
+
     public int äksä() {
         return this.x;
     }
@@ -303,12 +288,7 @@ public class Mato {
     public void setMadonosaty(ArrayList<Integer> madonosaty) {
         this.madonosaty = madonosaty;
     }
-    
-    public void Restarttti(){
-  
-     
-        
+
+    public void Restarttti() {
     }
-    
-    
 }
