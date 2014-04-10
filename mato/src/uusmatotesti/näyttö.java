@@ -16,8 +16,8 @@ public class näyttö extends JPanel implements Runnable{
 
     Mato mato = new Mato();
    
-    private final int borderx = 690;
-    private final int bordery = 530;
+    private final int borderx = 700;
+    private final int bordery = 540;
     private int x;
     private int y;
     private String suunta;
