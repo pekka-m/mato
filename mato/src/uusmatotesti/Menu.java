@@ -11,8 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
+ * MATO
  *
- * @author H3173
+ * @version 0.51
+ * @author Pekka M, Aleksi O
+ * @since 2014-03-07
  */
 public class Menu extends javax.swing.JFrame {
 

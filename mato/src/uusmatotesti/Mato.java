@@ -5,30 +5,38 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * MATO
  *
- * @author H3173
+ * @version 0.51
+ * @author Pekka M, Aleksi O
+ * @since 2014-03-07
  */
-public class Mato {
+public class Mato implements java.io.Serializable {
 
 //    näyttö näyttö = new näyttö();
     Safka safka = new Safka();
-    private ArrayList<Integer> madonosatx = new ArrayList<>();
-    private ArrayList<Integer> madonosaty = new ArrayList<>();
-    private int madonpituus = 3;
-    private int vikay;
-    private int tokavikay;
-    private int vikax;
-    private int tokavikax;
-    private int x;
-    private int y;
-    private int dx = 0;
-    private int dy = 0;
-    private String suunta;
-    private Random arpoja = new Random();
-    private boolean seinä = false;
-    private boolean törmäys = false;
-    private int safkax;
-    private int safkay;
+    private transient ArrayList<Integer> madonosatx = new ArrayList<>();
+    private transient ArrayList<Integer> madonosaty = new ArrayList<>();
+    private transient int madonpituus = 3;
+    private transient int vikay;
+    private transient int tokavikay;
+    private transient int vikax;
+    private transient int tokavikax;
+    private transient int x;
+    private transient int y;
+    private transient int dx = 0;
+    private transient int dy = 0;
+    private transient String suunta;
+    private transient Random arpoja = new Random();
+    private transient boolean seinä = false;
+    private transient boolean törmäys = false;
+    private transient int safkax;
+    private transient int safkay;
+    private int pisteet = 0;
+
+    public int getPisteet() {
+        return pisteet;
+    }
 
     public void setSafkax() {
         this.safkax = safka.getSafkax();
@@ -58,6 +66,7 @@ public class Mato {
     }
 
     public Mato() {
+        
         this.x = 320;
         this.y = 240;
         this.dx = 20;
@@ -178,6 +187,9 @@ public class Mato {
 
             //ollaanko törmätty safkaan SAFKASTA TEHDÄÄN OMA LUOKKA
             this.törmäys = (this.x == safka.getSafkax()) & (this.y == safka.getSafkay());
+            if (törmäys) {
+                this.pisteet++;
+            }
         }
     }
 

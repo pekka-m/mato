@@ -1,8 +1,14 @@
 package uusmatotesti;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -12,18 +18,19 @@ import javax.swing.*;
  * @author Pekka M, Aleksi O
  * @since 2014-03-07
  */
-public class näyttö extends JPanel implements Runnable {
+public class näyttö extends JPanel implements Runnable,java.io.Serializable {
 
     Mato mato = new Mato();
-    private final int borderx = 700;
-    private final int bordery = 540;
-    private int x;
-    private int y;
-    private String suunta;
-    private int pisteet = 0;
-    private JLabel ennätys;
-    private Thread thread;
-    private JLabel hävisit;
+    private final transient int borderx = 700;
+    private final transient int bordery = 540;
+    private transient int x;
+    private transient int y;
+    private transient String suunta;
+    private transient int pisteet = 0;
+    private transient JLabel ennätys;
+    private transient Thread thread;
+    private transient JLabel hävisit;
+    private int apina = 2;
 
     public näyttö() {
         setPreferredSize(new Dimension(borderx, bordery));
@@ -113,7 +120,6 @@ public class näyttö extends JPanel implements Runnable {
         }
 
         if (mato.isSeinä() == true) {
-
             g.setFont(new Font("Dialog", Font.PLAIN, 48));
             g.setColor(Color.red);
             Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -121,14 +127,28 @@ public class näyttö extends JPanel implements Runnable {
             g.drawString("hävisit", 250, 250);
 
             g.setFont(new Font("Dialog", Font.PLAIN, 22));
-            g.drawString("press R to restart", 250, 280);
-
-
+            g.drawString("Painappa R", 250, 280);
+           
+           
+            if (apina == 2){
+               
+            try{
+                FileOutputStream fileOut = new FileOutputStream("d://mato.ser");
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
+               out.writeObject(mato);
+               out.close();
+               fileOut.close();
+               System.out.println("data serialisoitu");
+                
+        }   catch (FileNotFoundException ex) {
+                Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            apina++;
+            }
+           
         }
-
-
-
-
         Image apple = Toolkit.getDefaultToolkit().getImage("apple.png");
         mato.isTörmäys();
         mato.setSafkax();
@@ -138,7 +158,7 @@ public class näyttö extends JPanel implements Runnable {
             // g.fillRect(safkax, safkay, 20, 20);  
             g.drawImage(apple, mato.getSafkax(), mato.getSafkay(), null);
             this.pisteet += 1;
-            ennätys.setText("pisteet: " + pisteet);
+            ennätys.setText("pisteet: " + mato.getPisteet());
             mato.setTörmäys(false);
 
             // aina safkatessa madon pituutta lisätään yhdellä

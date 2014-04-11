@@ -19,7 +19,6 @@ public class matomain extends JFrame {
     public matomain() {
 
         add(näyttö, BorderLayout.CENTER);
-
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         pack();
@@ -50,9 +49,7 @@ public class matomain extends JFrame {
                 if (e.getKeyCode() == 114) {
                     dispose();
                     new matomain();
-
                 }
-
             }
 
             @Override

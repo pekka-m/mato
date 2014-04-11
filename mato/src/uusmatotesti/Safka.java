@@ -3,14 +3,17 @@ package uusmatotesti;
 import java.util.Random;
 
 /**
+ * MATO
  *
- * @author H3173
+ * @version 0.51
+ * @author Pekka M, Aleksi O
+ * @since 2014-03-07
  */
-public class Safka{
+public class Safka implements java.io.Serializable {
     
-    private int safkax;
-    private int safkay;
-    private Random arpoja = new Random();
+    private transient int safkax;
+    private transient int safkay;
+    private transient Random arpoja = new Random();
     
     public Safka() {
         safkaArpoja();
