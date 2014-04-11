@@ -31,9 +31,31 @@ class Pisteet implements Comparable<Pisteet> {
 }
 
 public class PisteLista {
+     
+   static int pisteeet;
+ 
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
+         DeSerialisoitu desse = new DeSerialisoitu();
+        desse.deserialisoitu();
+        
+//        PisteetSerristä();
+        
+       try {
+            FileWriter writer = new FileWriter("d://testi.csv");
 
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-        generateCsvFile("d:\\testi.csv");
+            writer.append("TÄMÄONTESTI;"+ desse.getPisteet());
+
+            
+
+       
+
+            //generate whatever data you want
+
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         List<Pisteet> pisteet = new ArrayList<Pisteet>();
 
         pisteet.add(new Pisteet("Sakarias", 123));
@@ -61,24 +83,32 @@ public class PisteLista {
             System.out.println(pisteet.get(i).nimi + pisteet.get(i).pisteet);
         }
 
+        
+        
     }
 
+    
     private static void generateCsvFile(String sFileName) {
-        try {
-            FileWriter writer = new FileWriter(sFileName);
-
-            writer.append("DisplayName;71238\n");
-
-            writer.append("MKYONG;26\n");
-
-            writer.append("YOUR NAME;29\n");
-
-            //generate whatever data you want
-
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       
     }
-}
+    
+//    private  void PisteetSerristä() {
+//            Mato testi = null;
+//
+//        try {
+//            FileInputStream fileIn = new FileInputStream("D://mato.ser");
+//            ObjectInputStream in = new ObjectInputStream(fileIn);
+//            testi =(Mato) in.readObject();
+//            in.close();
+//            fileIn.close();
+//     
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(DeSerialisoitu.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(DeSerialisoitu.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(PisteLista.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//         this.pisteeet = testi.getPisteet();
+    }
+  

@@ -10,8 +10,10 @@ import java.util.logging.Logger;
 /* @author H3173 */
 
 public class DeSerialisoitu {
+    
+    private int pisteet;
 
-    public static void main(String[] args) throws ClassNotFoundException {
+    public  void deserialisoitu()  throws ClassNotFoundException {
         
         Mato testi = null;
         try {
@@ -29,10 +31,18 @@ public class DeSerialisoitu {
             Logger.getLogger(DeSerialisoitu.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        System.out.println("pisteet: " + testi.getPisteet());
-        
+       pisteet = testi.getPisteet();
+        System.out.println(pisteet);
        
         }
+
+    public int getPisteet() {
+        return pisteet;
+    }
+
+  
+    
+    
     }
 
 
