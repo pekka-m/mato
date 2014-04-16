@@ -34,36 +34,6 @@ public class Mato implements java.io.Serializable {
     private transient int safkay;
     private int pisteet = 0;
 
-    public int getPisteet() {
-        return pisteet;
-    }
-
-    public void setSafkax() {
-        this.safkax = safka.getSafkax();
-
-    }
-
-    public int getSafkax() {
-        return safkax;
-    }
-
-    public boolean isSeinä() {
-        return seinä;
-    }
-
-    public int getSafkay() {
-        return safkay;
-    }
-
-    public void setSafkay() {
-        this.safkay = safka.getSafkay();
-
-    }
-
-    public void getArpoja() {
-        safka.safkaArpoja();
-
-    }
 
     public Mato() {
         
@@ -303,4 +273,36 @@ public class Mato implements java.io.Serializable {
 
     public void Restarttti() {
     }
+    
+        public int getPisteet() {
+        return pisteet;
+    }
+
+    public void setSafkax() {
+        this.safkax = safka.getSafkax();
+
+    }
+
+    public int getSafkax() {
+        return safkax;
+    }
+
+    public boolean isSeinä() {
+        return seinä;
+    }
+
+    public int getSafkay() {
+        return safkay;
+    }
+
+    public void setSafkay() {
+        this.safkay = safka.getSafkay();
+
+    }
+
+    public void getArpoja() {
+        safka.safkaArpoja();
+
+    }
+
 }

@@ -31,6 +31,7 @@ public class näyttö extends JPanel implements Runnable,java.io.Serializable {
     private transient Thread thread;
     private transient JLabel hävisit;
     private int apina = 2;
+      private PisteLista piste = new PisteLista();
 
     public näyttö() {
         setPreferredSize(new Dimension(borderx, bordery));
@@ -129,6 +130,27 @@ public class näyttö extends JPanel implements Runnable,java.io.Serializable {
             g.setFont(new Font("Dialog", Font.PLAIN, 22));
             g.drawString("Painappa R", 250, 280);
            
+          
+           if (piste.pisteet.size() > 10){
+                for (int i = 0; i < 10; i++) {
+                               g.setColor(Color.red);
+
+                    g.setFont(new Font("Dialog", Font.PLAIN, 22));
+                  g.drawString(piste.pisteet.get(i).nimi, 100, 100);  
+                      
+                }
+               
+                 
+             }
+              else  {
+                   for (int i = 0; i < piste.pisteet.size(); i++) {
+                                   g.setColor(Color.red);
+
+                    g.setFont(new Font("Dialog", Font.PLAIN, 22));
+                    g.drawString(piste.pisteet.get(i).nimi, 100, 100);  
+             
+             }
+             
            
             if (apina == 2){
                
@@ -145,6 +167,11 @@ public class näyttö extends JPanel implements Runnable,java.io.Serializable {
             } catch (IOException ex) {
                 Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+             
+             
+             }
+          
             apina++;
             }
            
