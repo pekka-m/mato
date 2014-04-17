@@ -18,7 +18,7 @@ import javax.swing.*;
  * @author Pekka M, Aleksi O
  * @since 2014-03-07
  */
-public class näyttö extends JPanel implements Runnable,java.io.Serializable {
+public class näyttö extends JPanel implements Runnable, java.io.Serializable {
 
     Mato mato = new Mato();
     private final transient int borderx = 700;
@@ -31,24 +31,47 @@ public class näyttö extends JPanel implements Runnable,java.io.Serializable {
     private transient Thread thread;
     private transient JLabel hävisit;
     private int apina = 2;
-      private PisteLista piste = new PisteLista();
+    private PisteLista piste = new PisteLista();
+    private int kaniini = 0;
+    private int jops = 0;
+
+    public void setKaniini(int kaniini) {
+        this.kaniini = kaniini;
+    }
+
+    public int getKaniini() {
+        return kaniini;
+    }
 
     public näyttö() {
+
+       thread = new Thread(this);
+        thread.start();
+        try {
+            thread.wait();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        thread.notify();
         setPreferredSize(new Dimension(borderx, bordery));
         setBackground(Color.black);
         setLayout(new FlowLayout(FlowLayout.CENTER));
-
-
 
         ennätys = new JLabel();
         add(ennätys);
         ennätys.setForeground(Color.white);
         ennätys.setText("pisteet: 0");
-
-
-
-        thread = new Thread(this);
-        thread.start();
+   
+    }
+   
+    private void desdi() {
+        System.out.println("\nJOO\n");
+    }
+    public void Aloita() {
+        System.out.println("\n" + this.jops + "\n");
+        this.jops = 1;
+        System.out.println("\n" + this.jops + "\n");
+        System.out.println("\n\nTESTIESITSEITISETISEITISETISEITSIETISEITSIETISETISEITITS\n\n");
     }
 
     public void siirräSuunta(String suunta) {
@@ -59,18 +82,21 @@ public class näyttö extends JPanel implements Runnable,java.io.Serializable {
     @Override
     public void run() {
         while (true) {
+            
             mato.siirrä();
-
-            repaint();
+            repaint(); 
+            
             try {
                 Thread.sleep(75);
             } catch (InterruptedException e) {
             }
+            
         }
     }
 
     @Override
     public void paintComponent(Graphics g) {
+        //desdi();
         // mahdollisesti affinetransform juttua käytetään kuvan kääntämiseen
         super.paintComponent(g);
         // madon pää
@@ -129,52 +155,51 @@ public class näyttö extends JPanel implements Runnable,java.io.Serializable {
 
             g.setFont(new Font("Dialog", Font.PLAIN, 22));
             g.drawString("Painappa R", 250, 280);
-           
-          
-           if (piste.pisteet.size() > 10){
+
+
+            if (piste.pisteet.size() > 10) {
                 for (int i = 0; i < 10; i++) {
-                               g.setColor(Color.red);
+                    g.setColor(Color.red);
 
                     g.setFont(new Font("Dialog", Font.PLAIN, 22));
-                  g.drawString(piste.pisteet.get(i).nimi, 100, 100);  
-                      
+                    g.drawString(piste.pisteet.get(i).nimi, 100, 100);
+
                 }
-               
-                 
-             }
-              else  {
-                   for (int i = 0; i < piste.pisteet.size(); i++) {
-                                   g.setColor(Color.red);
+
+
+            } else {
+                for (int i = 0; i < piste.pisteet.size(); i++) {
+                    g.setColor(Color.red);
 
                     g.setFont(new Font("Dialog", Font.PLAIN, 22));
-                    g.drawString(piste.pisteet.get(i).nimi, 100, 100);  
-             
-             }
-             
-           
-            if (apina == 2){
-               
-            try{
-                FileOutputStream fileOut = new FileOutputStream("d://mato.ser");
-                ObjectOutputStream out = new ObjectOutputStream(fileOut);
-               out.writeObject(mato);
-               out.close();
-               fileOut.close();
-               System.out.println("data serialisoitu");
-                
-        }   catch (FileNotFoundException ex) {
-                Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
+                    g.drawString(piste.pisteet.get(i).nimi, 100, 100);
+
+                }
             }
-            
-             
-             
-             }
-          
+
+            if (apina == 2) {
+
+                try {
+                    FileOutputStream fileOut = new FileOutputStream("d://mato.ser");
+                    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                    out.writeObject(mato);
+                    out.close();
+                    fileOut.close();
+                    System.out.println("data serialisoitu");
+
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+
+            }
+
             apina++;
-            }
-           
+
+
         }
         Image apple = Toolkit.getDefaultToolkit().getImage("apple.png");
         mato.isTörmäys();
@@ -204,4 +229,5 @@ public class näyttö extends JPanel implements Runnable,java.io.Serializable {
     public int yyyy() {
         return this.y;
     }
+
 }

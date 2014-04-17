@@ -15,6 +15,8 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 public class matomain extends JFrame {
 
     näyttö näyttö = new näyttö();
+    Periyttäjä periyttäjä = new Periyttäjä();
+    Perijä perijä = new Perijä();
 
     public matomain() {
 
