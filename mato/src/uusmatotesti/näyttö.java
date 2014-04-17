@@ -1,6 +1,7 @@
 package uusmatotesti;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import javax.swing.*;
  * @author Pekka M, Aleksi O
  * @since 2014-03-07
  */
-public class näyttö extends JPanel implements Runnable,java.io.Serializable {
+public class näyttö extends JPanel implements Runnable, java.io.Serializable {
 
     Mato mato = new Mato();
     private final transient int borderx = 700;
@@ -31,7 +32,7 @@ public class näyttö extends JPanel implements Runnable,java.io.Serializable {
     private transient Thread thread;
     private transient JLabel hävisit;
     private int apina = 2;
-      private PisteLista piste = new PisteLista();
+
 
     public näyttö() {
         setPreferredSize(new Dimension(borderx, bordery));
@@ -88,6 +89,8 @@ public class näyttö extends JPanel implements Runnable,java.io.Serializable {
             g.drawImage(madonpää, mato.getX(), mato.getY(), null);
         }
 
+
+
         // yläseinä jne
         g.setColor(Color.darkGray);
         g.fillRect(0, 0, 700, 20);
@@ -95,11 +98,15 @@ public class näyttö extends JPanel implements Runnable,java.io.Serializable {
         g.fillRect(680, 0, 20, 540);
         g.fillRect(0, 520, 700, 20);
 
+
+
         // piirretään madon keskiosa, pituus muuttujasta madonpituus, koordinaatit taulukoista
         for (int i = 0; i < mato.getMadonpituus() - 1; i++) {
             Image madonruho = Toolkit.getDefaultToolkit().getImage("madonruho.png");
             g.drawImage(madonruho, mato.getMadonosatx(i), mato.getMadonosaty(i), null);
         }
+
+
 
         // madon jalat
         if (mato.getVikay() == mato.getTokavikay()) {
@@ -120,84 +127,93 @@ public class näyttö extends JPanel implements Runnable,java.io.Serializable {
             }
         }
 
+
+
+
+
         if (mato.isSeinä() == true) {
             g.setFont(new Font("Dialog", Font.PLAIN, 48));
             g.setColor(Color.red);
             Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-
             g.drawString("hävisit", 250, 250);
-
             g.setFont(new Font("Dialog", Font.PLAIN, 22));
             g.drawString("Painappa R", 250, 280);
-           
+
           
-           if (piste.pisteet.size() > 10){
-                for (int i = 0; i < 10; i++) {
-                               g.setColor(Color.red);
 
-                    g.setFont(new Font("Dialog", Font.PLAIN, 22));
-                  g.drawString(piste.pisteet.get(i).nimi, 100, 100);  
-                      
+
+
+
+            if (apina == 2) {
+                try {
+                    FileOutputStream fileOut = new FileOutputStream("d://mato.ser");
+                    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                    out.writeObject(mato);
+                    out.close();
+                    fileOut.close();
+                    System.out.println("data serialisoitu");
+
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
                 }
-               
-                 
-             }
-              else  {
-                   for (int i = 0; i < piste.pisteet.size(); i++) {
-                                   g.setColor(Color.red);
-
+                  PisteLista piste = new PisteLista();
+                int aksa =100;
+            
+              if (piste.pisteet.size() > 10) {
+                for (int i = 0; i < 10; i++) {
+                    g.setColor(Color.red);
                     g.setFont(new Font("Dialog", Font.PLAIN, 22));
-                    g.drawString(piste.pisteet.get(i).nimi, 100, 100);  
-             
-             }
-             
-           
-            if (apina == 2){
-               
-            try{
-                FileOutputStream fileOut = new FileOutputStream("d://mato.ser");
-                ObjectOutputStream out = new ObjectOutputStream(fileOut);
-               out.writeObject(mato);
-               out.close();
-               fileOut.close();
-               System.out.println("data serialisoitu");
-                
-        }   catch (FileNotFoundException ex) {
-                Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
+                    g.drawString(piste.pisteet.get(i).nimi, 100, aksa);
+                    aksa+=30;
+                }
+            } else {
+                for (int i = 0; i < piste.pisteet.size(); i++) {
+                    g.setColor(Color.red);
+                    g.setFont(new Font("Dialog", Font.PLAIN, 22));
+                    g.drawString(piste.pisteet.get(i).nimi, 100, aksa);
+                    aksa+=30;
+                }
+            }
+
+            apina++;
+              
             }
             
-             
-             
-             }
-          
-            apina++;
-            }
-           
-        }
-        Image apple = Toolkit.getDefaultToolkit().getImage("apple.png");
-        mato.isTörmäys();
-        mato.setSafkax();
-        mato.setSafkay();
-        if (mato.isTörmäys()) {
-            mato.getArpoja();
-            // g.fillRect(safkax, safkay, 20, 20);  
-            g.drawImage(apple, mato.getSafkax(), mato.getSafkay(), null);
-            this.pisteet += 1;
-            ennätys.setText("pisteet: " + mato.getPisteet());
-            mato.setTörmäys(false);
+        
 
-            // aina safkatessa madon pituutta lisätään yhdellä
-            mato.lisääMadonpituutta();
-        } else {
-            g.drawImage(apple, mato.getSafkax(), mato.getSafkay(), null);
-        }
-        this.repaint();
+    }
+    Image apple = Toolkit.getDefaultToolkit().getImage("apple.png");
+
+    mato.isTörmäys ();
+
+    mato.setSafkax ();
+
+    mato.setSafkay ();
+
+    if (mato.isTörmäys () 
+        ) {
+            mato.getArpoja();
+        // g.fillRect(safkax, safkay, 20, 20);  
+        g.drawImage(apple, mato.getSafkax(), mato.getSafkay(), null);
+        this.pisteet += 1;
+        ennätys.setText("pisteet: " + mato.getPisteet());
+        mato.setTörmäys(false);
+
+        // aina safkatessa madon pituutta lisätään yhdellä
+        mato.lisääMadonpituutta();
     }
 
-    // helpottaa koodin vääntämistä, output ikkunaan päivittyy madon koordinaatit
-    public int äksä() {
+    
+        else {
+            g.drawImage(apple, mato.getSafkax(), mato.getSafkay(), null);
+    }
+
+    this.repaint();
+}
+// helpottaa koodin vääntämistä, output ikkunaan päivittyy madon koordinaatit
+public int äksä() {
         return this.x;
     }
 

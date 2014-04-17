@@ -32,7 +32,7 @@ public class DeSerialisoitu {
         }
         
        pisteet = testi.getPisteet();
-        System.out.println(pisteet);
+
        
         }
 

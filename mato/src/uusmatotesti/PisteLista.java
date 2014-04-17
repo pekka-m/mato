@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +26,7 @@ class Pisteet implements Comparable<Pisteet> {
    private  List<Pisteet> pisteet = new ArrayList<>();
 
   
-    public Pisteet(String nimi, int pisteet) {
+    public Pisteet(String nimi, int pisteeet) {
         this.nimi = nimi;
         this.pisteeet = pisteeet;
     }
@@ -38,44 +40,42 @@ class Pisteet implements Comparable<Pisteet> {
 public class PisteLista {
 
     private int pisteeet;
-     List<Pisteet> pisteet = new ArrayList<Pisteet>();
-
+     List<Pisteet> pisteet = new ArrayList<>();
+     private int testiintti;
+     
     public PisteLista() {
         try {
             DeSerialisoitu desse = new DeSerialisoitu();
-            try {
+            try { 
                 desse.deserialisoitu();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(PisteLista.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            //        PisteetSerristä();
+          
 
             try {
-                FileWriter writer = new FileWriter("d://testi.csv");
+                
+                try (FileWriter writer = new FileWriter("d://testi.csv",true)) {
+                    // heittää current daten listalle
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    Date date = new Date();
+                    
+                    writer.append("Testi;" + desse.getPisteet() +";" + dateFormat.format(date)+ ";" + "\n");
+                   
+                   
 
-                writer.append("TÄMÄONTESTI;" + desse.getPisteet());
 
 
+                    //generate whatever data you want
 
-
-
-                //generate whatever data you want
-
-                writer.flush();
-                writer.close();
+                    writer.flush();
+                }
             } catch (IOException e) {
-                e.printStackTrace();
             }
            
 
-            pisteet.add(new Pisteet("Sakarias", 123));
-            pisteet.add(new Pisteet("Sasdfas", 765));
-            pisteet.add(new Pisteet("Khjdhgfjs", 45));
-            pisteet.add(new Pisteet("ASDFas", 987));
-            pisteet.add(new Pisteet("AAPAOAPAPOPAO", 34));
-            pisteet.add(new Pisteet("Lojnhibt", 1));
-
+        
             String csvFile = "d:\\testi.csv";
             BufferedReader br = null;
             String line = "";
@@ -105,7 +105,11 @@ public class PisteLista {
 
     }
 
-      public List<Pisteet> getPisteet() {
+      /**
+     *
+     * @return
+     */
+    public List<Pisteet> getPisteet() {
         return pisteet;
     }
 
