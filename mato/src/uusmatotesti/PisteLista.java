@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static uusmatotesti.PisteKokeilu.NimiToPiste.getNimiToPisteet;
 
 
 /**
@@ -24,6 +25,7 @@ class Pisteet implements Comparable<Pisteet> {
     String nimi;
     int pisteeet;
    private  List<Pisteet> pisteet = new ArrayList<>();
+   
 
   
     public Pisteet(String nimi, int pisteeet) {
@@ -42,6 +44,7 @@ public class PisteLista {
     private int pisteeet;
      List<Pisteet> pisteet = new ArrayList<>();
      private int testiintti;
+      private  String nimiii = getNimiToPisteet();
      
     public PisteLista() {
         try {
@@ -60,8 +63,10 @@ public class PisteLista {
                     // heittää current daten listalle
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     Date date = new Date();
-                    
-                    writer.append("Testi;" + desse.getPisteet() +";" + dateFormat.format(date)+ ";" + "\n");
+//                    dateFormat.format(date)+ ";"
+                 
+                   
+                    writer.append(nimiii +";" + desse.getPisteet() +";"  + "\n");
                    
                    
 

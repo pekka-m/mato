@@ -11,7 +11,9 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-
+import uusmatotesti.PisteKokeilu.NimiToPiste;
+import static uusmatotesti.PisteKokeilu.NimiToPiste.getNimiToPisteet;
+import static uusmatotesti.PisteKokeilu.NimiToPiste.setNimiToPisteet;
 /**
  * MATO
  *
@@ -32,6 +34,7 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
     private transient Thread thread;
     private transient JLabel hävisit;
     private int apina = 2;
+    private String nimi;
 
 
     public näyttö() {
@@ -46,6 +49,7 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
         ennätys.setForeground(Color.white);
         ennätys.setText("pisteet: 0");
 
+       
 
 
         thread = new Thread(this);
@@ -139,7 +143,7 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
             g.setFont(new Font("Dialog", Font.PLAIN, 22));
             g.drawString("Painappa R", 250, 280);
 
-          
+        
 
 
 
@@ -176,8 +180,19 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
                     aksa+=30;
                 }
             }
-
+              
+               
+                
             apina++;
+             nimi = JOptionPane.showInputDialog(null, "anna nimi");
+//            JOptionPane.showMessageDialog(null, nimi);
+             System.out.println(this.nimi);
+             
+             
+             setNimiToPisteet(nimi);
+             
+             getNimiToPisteet();
+            
               
             }
             
