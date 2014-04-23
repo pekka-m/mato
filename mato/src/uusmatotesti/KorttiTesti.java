@@ -5,9 +5,12 @@
 package uusmatotesti;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.smartcardio.Card;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-
+import javax.swing.JLabel;
 
 /**
  *
@@ -15,12 +18,14 @@ import javax.swing.JFrame;
  */
 public class KorttiTesti extends javax.swing.JFrame {
 
-
     /**
      * Creates new form KorttiTesti
      */
     public KorttiTesti() {
+        
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
     }
 
     /**
@@ -32,13 +37,14 @@ public class KorttiTesti extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel5 = new javax.swing.JPanel();
+        näyttö2 = new uusmatotesti.näyttö();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        AloitaNappi = new javax.swing.JButton();
+        LopetaNappi = new javax.swing.JButton();
+        HallOfFameNappi = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         näyttö1 = new uusmatotesti.näyttö();
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -53,82 +59,57 @@ public class KorttiTesti extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(680, 540));
 
+        jPanel3.setPreferredSize(new java.awt.Dimension(680, 540));
         jPanel3.setLayout(new java.awt.CardLayout());
 
-        jLabel4.setText("kortti 2");
+        jPanel6.setMinimumSize(new java.awt.Dimension(680, 540));
+        jPanel6.setPreferredSize(new java.awt.Dimension(700, 540));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton4.setText("Korttiin 1");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        AloitaNappi.setText("Aloita peli");
+        AloitaNappi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                AloitaNappiActionPerformed(evt);
             }
         });
+        jPanel6.add(AloitaNappi, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 91, -1));
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jLabel4))
-                .addContainerGap(263, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jLabel4)
-                .addGap(64, 64, 64)
-                .addComponent(jButton4)
-                .addContainerGap(135, Short.MAX_VALUE))
-        );
+        LopetaNappi.setText("Lopeta peli");
+        LopetaNappi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LopetaNappiActionPerformed(evt);
+            }
+        });
+        jPanel6.add(LopetaNappi, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 91, -1));
+
+        HallOfFameNappi.setText("Hall of Fame");
+        HallOfFameNappi.setName(""); // NOI18N
+        jPanel6.add(HallOfFameNappi, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uusmatotesti/background.png"))); // NOI18N
+        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel3.add(jPanel6, "card3");
 
-        jLabel3.setText("kortti 1");
-
-        jButton3.setText("Korttiin 2");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        näyttö1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                näyttö1KeyPressed(evt);
-            }
-        });
+        jPanel4.setName("Peli_Ikkuna"); // NOI18N
+        jPanel4.setPreferredSize(new java.awt.Dimension(680, 540));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addComponent(näyttö1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel3)
-                        .addGap(61, 61, 61)
-                        .addComponent(jButton3))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(näyttö1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(näyttö1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.add(jPanel4, "card2");
@@ -147,21 +128,20 @@ public class KorttiTesti extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void AloitaNappiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AloitaNappiActionPerformed
         // TODO add your handling code here:
-        CardLayout cl = (CardLayout)(jPanel3.getLayout());
+        CardLayout cl = (CardLayout) (jPanel3.getLayout());
         cl.next(jPanel3);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        CardLayout cl = (CardLayout)(jPanel3.getLayout());
-        cl.next(jPanel3);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
+    }//GEN-LAST:event_AloitaNappiActionPerformed
+    
     private void näyttö1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_näyttö1KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_näyttö1KeyPressed
+    
+    private void LopetaNappiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LopetaNappiActionPerformed
+        // TODO add your handling code here:
+        System.exit(1);
+    }//GEN-LAST:event_LopetaNappiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,15 +178,15 @@ public class KorttiTesti extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton AloitaNappi;
+    private javax.swing.JButton HallOfFameNappi;
+    private javax.swing.JButton LopetaNappi;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private uusmatotesti.näyttö näyttö1;
+    private uusmatotesti.näyttö näyttö2;
     // End of variables declaration//GEN-END:variables
-
 }

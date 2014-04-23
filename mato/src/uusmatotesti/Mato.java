@@ -34,9 +34,8 @@ public class Mato implements java.io.Serializable {
     private transient int safkay;
     private int pisteet = 0;
 
-
     public Mato() {
-        
+
         this.x = 320;
         this.y = 240;
         this.dx = 20;
@@ -50,6 +49,30 @@ public class Mato implements java.io.Serializable {
         this.vikax = this.madonosatx.get(this.madonpituus - 1);
         this.tokavikax = this.madonosatx.get(this.madonpituus - 2);
         suunnanArpoja();
+    }
+
+    public void UusiPeliMatoLuokka() {
+
+        this.x = 320;
+        this.y = 240;
+        this.dx = 20;
+        this.dy = 0;
+        this.pisteet = 0;
+        this.madonpituus = 3;
+        this.seinä = false;
+        this.törmäys = false;
+        this.madonosatx.clear();
+        this.madonosaty.clear();
+        for (int i = 0; i < this.madonpituus; i++) {
+            this.madonosatx.add(320);
+            this.madonosaty.add(240);
+        }
+        this.vikay = this.madonosaty.get(this.madonpituus - 1);
+        this.tokavikay = this.madonosaty.get(this.madonpituus - 2);
+        this.vikax = this.madonosatx.get(this.madonpituus - 1);
+        this.tokavikax = this.madonosatx.get(this.madonpituus - 2);
+        suunnanArpoja();
+
     }
 
     private void suunnanArpoja() {
@@ -271,10 +294,7 @@ public class Mato implements java.io.Serializable {
         this.madonosaty = madonosaty;
     }
 
-    public void Restarttti() {
-    }
-    
-        public int getPisteet() {
+    public int getPisteet() {
         return pisteet;
     }
 
@@ -304,5 +324,4 @@ public class Mato implements java.io.Serializable {
         safka.safkaArpoja();
 
     }
-
 }

@@ -1,6 +1,8 @@
 package uusmatotesti;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -53,6 +55,17 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
 
 
 
+
+    }
+
+    public void UusiPeli() {
+        mato.UusiPeliMatoLuokka();
+        this.apina = 2;
+        this.pisteet = 0;
+        ennätys.setText("pisteet: 0");
+    }
+
+    public void Aloita() {
         thread = new Thread(this);
         thread.start();
     }
@@ -200,10 +213,10 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
                 }
             }
             aksa = 100;
-               if (piste.pisteet.size() > 10) {
+            if (piste.pisteet.size() > 10) {
                 for (int i = 0; i < 10; i++) {
-                  
-                  new Integer(piste.pisteet.get(i).pisteeet).toString();
+
+                    new Integer(piste.pisteet.get(i).pisteeet).toString();
                     g.setColor(Color.red);
                     g.setFont(new Font("Dialog", Font.PLAIN, 22));
                     g.drawString(new Integer(piste.pisteet.get(i).pisteeet).toString(), 300, aksa);
@@ -233,7 +246,16 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
 
         if (mato.isTörmäys()) {
             mato.getArpoja();
-            // g.fillRect(safkax, safkay, 20, 20);  
+
+            // Tarkistetaan onko safka arvottu madon hännän päälle
+            for (int i = 0; i < mato.getMadonpituus() - 1; i++) {
+                if (mato.getSafkax() == mato.getMadonosatx(i) && mato.getSafkay() == mato.getMadonosaty(i)) {
+                    mato.getArpoja();
+                } else {
+                    break;
+                }
+            }
+
             g.drawImage(apple, mato.getSafkax(), mato.getSafkay(), null);
             this.pisteet += 1;
             ennätys.setText("pisteet: " + mato.getPisteet());
@@ -248,6 +270,7 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
         this.repaint();
     }
 // helpottaa koodin vääntämistä, output ikkunaan päivittyy madon koordinaatit
+
     public int äksä() {
         return this.x;
     }

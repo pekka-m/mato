@@ -10,11 +10,11 @@ import java.util.Random;
  * @since 2014-03-07
  */
 public class Safka implements java.io.Serializable {
-    
+
     private transient int safkax;
     private transient int safkay;
     private transient Random arpoja = new Random();
-    
+
     public Safka() {
         safkaArpoja();
     }
@@ -23,9 +23,9 @@ public class Safka implements java.io.Serializable {
 
         this.safkax = this.arpoja.nextInt(31) * 20 + 20;
         this.safkay = this.arpoja.nextInt(23) * 20 + 20;
-        
+
     }
-    
+
     public int getSafkax() {
         return this.safkax;
     }
@@ -41,5 +41,4 @@ public class Safka implements java.io.Serializable {
     public void setSafkay(int safkay) {
         this.safkay = safkay;
     }
-
 }

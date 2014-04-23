@@ -43,11 +43,7 @@ public class PisteLista {
     private int testiintti;
     private String nimiii;
 
-    public PisteLista() {
-    }
-
     public void luopistelista() {
-
         this.nimiii = getNimiToPisteet();
         try {
             DeSerialisoitu desse = new DeSerialisoitu();
@@ -56,28 +52,18 @@ public class PisteLista {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(PisteLista.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-
-
             try {
-
-                try (FileWriter writer = new FileWriter("d://testi.csv", true)) {
+                try (FileWriter writer = new FileWriter(".mhs", true)) {
                     // heittää current daten listalle
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     Date date = new Date();
-//                    dateFormat.format(date)+ ";"
-
-
                     writer.append(this.nimiii + ";" + desse.getPisteet() + ";" + "\n");
-
-                    //generate whatever data you want
-
                     writer.flush();
                 }
             } catch (IOException e) {
             }
 
-            String csvFile = "d:\\testi.csv";
+            String csvFile = ".mhs";
             BufferedReader br = null;
             String line = "";
             String cvsSplitBy = ";";
@@ -101,11 +87,6 @@ public class PisteLista {
         } catch (IOException ex) {
             Logger.getLogger(PisteLista.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
-
-
-
     }
 
     public List<Pisteet> getPisteet() {
