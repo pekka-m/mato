@@ -9,9 +9,12 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.ImageIcon;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -27,8 +30,11 @@ public class MatoPeli extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private JLabel label = new JLabel();
     private javax.swing.JLabel jLabel1;
+    private JPanel jPanel1;
+    private JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    PisteLista piste = new PisteLista();
     
 
     /**
@@ -92,7 +98,10 @@ public class MatoPeli extends javax.swing.JFrame {
         LopetaNappi = new javax.swing.JButton();
         HallOfFameNappi = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();       
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -133,10 +142,19 @@ public class MatoPeli extends javax.swing.JFrame {
 
         HallOfFameNappi.setText("Hall of Fame");
         HallOfFameNappi.setName(""); // NOI18N
+        HallOfFameNappi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    HallOfFameNappiActionPerformed(evt);
+                } catch (IOException ex) {
+                    Logger.getLogger(MatoPeli.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         
         jPanel6.add(HallOfFameNappi, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, -1, -1));
         
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uusmatotesti/background.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uusmatotesti/background.png")));
         jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel3.add(jPanel6, "card3");
@@ -160,6 +178,24 @@ public class MatoPeli extends javax.swing.JFrame {
 
         jPanel3.add(jPanel4, "card2");
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(680, 540));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        
+        jButton1.setText("Takaisin");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        
+         
+        
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(599, 506, -1, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uusmatotesti/background.png")));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel3.add(jPanel1, "card4");
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,6 +205,7 @@ public class MatoPeli extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
+        
         pack();
     }
 
@@ -183,33 +220,40 @@ public class MatoPeli extends javax.swing.JFrame {
 
         System.exit(1);
     }
+    
+    private void HallOfFameNappiActionPerformed(java.awt.event.ActionEvent evt) throws IOException {                                                
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) (jPanel3.getLayout());
+        cl.last(jPanel3);
+        piste.luePistelista();
+        this.repaint();
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) (jPanel3.getLayout());
+        cl.first(jPanel3);
+        
+    } 
 
     public static void main(String args[]) {
 
         MatoPeli matopeli = new MatoPeli();
-
-
-
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(KorttiTesti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(KorttiTesti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(KorttiTesti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(KorttiTesti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//   
-//
-//
-//     
-
-    }
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(KorttiTesti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(KorttiTesti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(KorttiTesti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(KorttiTesti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    } 
 }

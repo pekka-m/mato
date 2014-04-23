@@ -46,6 +46,8 @@ public class KorttiTesti extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         näyttö1 = new uusmatotesti.näyttö();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -86,6 +88,11 @@ public class KorttiTesti extends javax.swing.JFrame {
 
         HallOfFameNappi.setText("Hall of Fame");
         HallOfFameNappi.setName(""); // NOI18N
+        HallOfFameNappi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HallOfFameNappiActionPerformed(evt);
+            }
+        });
         jPanel6.add(HallOfFameNappi, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uusmatotesti/background.png"))); // NOI18N
@@ -113,6 +120,19 @@ public class KorttiTesti extends javax.swing.JFrame {
         );
 
         jPanel3.add(jPanel4, "card2");
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(680, 540));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setText("Takaisin");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(599, 506, -1, -1));
+
+        jPanel3.add(jPanel1, "card4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,6 +162,14 @@ public class KorttiTesti extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(1);
     }//GEN-LAST:event_LopetaNappiActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void HallOfFameNappiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HallOfFameNappiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HallOfFameNappiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,7 +209,9 @@ public class KorttiTesti extends javax.swing.JFrame {
     private javax.swing.JButton AloitaNappi;
     private javax.swing.JButton HallOfFameNappi;
     private javax.swing.JButton LopetaNappi;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

@@ -89,6 +89,30 @@ public class PisteLista {
         }
     }
 
+    public void luePistelista() throws IOException {
+        String csvFile = ".mhs";
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ";";
+        try {
+            br = new BufferedReader(new FileReader(csvFile));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PisteLista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        while ((line = br.readLine()) != null) {
+            String[] country = line.split(cvsSplitBy);
+            int pisteapu = Integer.parseInt(country[1]);
+            pisteet.add(new Pisteet(country[0], pisteapu));
+        }
+
+        Collections.sort(pisteet, Collections.reverseOrder());
+
+        for (int i = 0; i < pisteet.size(); i++) {
+            System.out.println(pisteet.get(i).nimi + pisteet.get(i).pisteeet);
+        }
+    }
+
     public List<Pisteet> getPisteet() {
         return pisteet;
     }
