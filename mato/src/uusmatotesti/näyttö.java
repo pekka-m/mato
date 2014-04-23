@@ -14,6 +14,7 @@ import javax.swing.*;
 import uusmatotesti.PisteKokeilu.NimiToPiste;
 import static uusmatotesti.PisteKokeilu.NimiToPiste.getNimiToPisteet;
 import static uusmatotesti.PisteKokeilu.NimiToPiste.setNimiToPisteet;
+
 /**
  * MATO
  *
@@ -35,7 +36,7 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
     private transient JLabel hävisit;
     private int apina = 2;
     private String nimi;
-
+    private PisteLista piste = new PisteLista();
 
     public näyttö() {
         setPreferredSize(new Dimension(borderx, bordery));
@@ -49,7 +50,7 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
         ennätys.setForeground(Color.white);
         ennätys.setText("pisteet: 0");
 
-       
+
 
 
         thread = new Thread(this);
@@ -143,7 +144,7 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
             g.setFont(new Font("Dialog", Font.PLAIN, 22));
             g.drawString("Painappa R", 250, 280);
 
-        
+
 
 
 
@@ -162,73 +163,92 @@ public class näyttö extends JPanel implements Runnable, java.io.Serializable {
                 } catch (IOException ex) {
                     Logger.getLogger(näyttö.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                  PisteLista piste = new PisteLista();
-                int aksa =100;
-            
-              if (piste.pisteet.size() > 10) {
+
+
+
+                apina++;
+
+                nimi = JOptionPane.showInputDialog(null, "anna nimi");
+//            JOptionPane.showMessageDialog(null, nimi);
+                System.out.println(this.nimi);
+
+
+                setNimiToPisteet(nimi);
+
+                getNimiToPisteet();
+
+                this.piste.luopistelista();
+
+            }
+
+
+            int aksa = 100;
+
+            if (piste.pisteet.size() > 10) {
                 for (int i = 0; i < 10; i++) {
                     g.setColor(Color.red);
                     g.setFont(new Font("Dialog", Font.PLAIN, 22));
                     g.drawString(piste.pisteet.get(i).nimi, 100, aksa);
-                    aksa+=30;
+                    aksa += 30;
                 }
             } else {
                 for (int i = 0; i < piste.pisteet.size(); i++) {
                     g.setColor(Color.red);
                     g.setFont(new Font("Dialog", Font.PLAIN, 22));
                     g.drawString(piste.pisteet.get(i).nimi, 100, aksa);
-                    aksa+=30;
+                    aksa += 30;
                 }
             }
-              
-               
-                
-            apina++;
-             nimi = JOptionPane.showInputDialog(null, "anna nimi");
-//            JOptionPane.showMessageDialog(null, nimi);
-             System.out.println(this.nimi);
-             
-             
-             setNimiToPisteet(nimi);
-             
-             getNimiToPisteet();
-            
-              
+            aksa = 100;
+               if (piste.pisteet.size() > 10) {
+                for (int i = 0; i < 10; i++) {
+                  
+                  new Integer(piste.pisteet.get(i).pisteeet).toString();
+                    g.setColor(Color.red);
+                    g.setFont(new Font("Dialog", Font.PLAIN, 22));
+                    g.drawString(new Integer(piste.pisteet.get(i).pisteeet).toString(), 300, aksa);
+                    aksa += 30;
+                }
+            } else {
+                for (int i = 0; i < piste.pisteet.size(); i++) {
+                    g.setColor(Color.red);
+                    g.setFont(new Font("Dialog", Font.PLAIN, 22));
+                    g.drawString(new Integer(piste.pisteet.get(i).pisteeet).toString(), 300, aksa);
+                    aksa += 30;
+                }
             }
-            
-        
 
-    }
-    Image apple = Toolkit.getDefaultToolkit().getImage("apple.png");
 
-    mato.isTörmäys ();
 
-    mato.setSafkax ();
 
-    mato.setSafkay ();
+        }
 
-    if (mato.isTörmäys () 
-        ) {
+        Image apple = Toolkit.getDefaultToolkit().getImage("apple.png");
+
+        mato.isTörmäys();
+
+        mato.setSafkax();
+
+        mato.setSafkay();
+
+        if (mato.isTörmäys()) {
             mato.getArpoja();
-        // g.fillRect(safkax, safkay, 20, 20);  
-        g.drawImage(apple, mato.getSafkax(), mato.getSafkay(), null);
-        this.pisteet += 1;
-        ennätys.setText("pisteet: " + mato.getPisteet());
-        mato.setTörmäys(false);
-
-        // aina safkatessa madon pituutta lisätään yhdellä
-        mato.lisääMadonpituutta();
-    }
-
-    
-        else {
+            // g.fillRect(safkax, safkay, 20, 20);  
             g.drawImage(apple, mato.getSafkax(), mato.getSafkay(), null);
-    }
+            this.pisteet += 1;
+            ennätys.setText("pisteet: " + mato.getPisteet());
+            mato.setTörmäys(false);
 
-    this.repaint();
-}
+            // aina safkatessa madon pituutta lisätään yhdellä
+            mato.lisääMadonpituutta();
+        } else {
+            g.drawImage(apple, mato.getSafkax(), mato.getSafkay(), null);
+        }
+
+        this.repaint();
+    }
 // helpottaa koodin vääntämistä, output ikkunaan päivittyy madon koordinaatit
-public int äksä() {
+    public int äksä() {
         return this.x;
     }
 

@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static uusmatotesti.PisteKokeilu.NimiToPiste.getNimiToPisteet;
 
-
 /**
  * MATO
  *
@@ -24,10 +23,8 @@ class Pisteet implements Comparable<Pisteet> {
 
     String nimi;
     int pisteeet;
-   private  List<Pisteet> pisteet = new ArrayList<>();
-   
+    private List<Pisteet> pisteet = new ArrayList<>();
 
-  
     public Pisteet(String nimi, int pisteeet) {
         this.nimi = nimi;
         this.pisteeet = pisteeet;
@@ -42,35 +39,36 @@ class Pisteet implements Comparable<Pisteet> {
 public class PisteLista {
 
     private int pisteeet;
-     List<Pisteet> pisteet = new ArrayList<>();
-     private int testiintti;
-      private  String nimiii = getNimiToPisteet();
-     
+    List<Pisteet> pisteet = new ArrayList<>();
+    private int testiintti;
+    private String nimiii;
+
     public PisteLista() {
+    }
+
+    public void luopistelista() {
+
+        this.nimiii = getNimiToPisteet();
         try {
             DeSerialisoitu desse = new DeSerialisoitu();
-            try { 
+            try {
                 desse.deserialisoitu();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(PisteLista.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-          
+
 
             try {
-                
-                try (FileWriter writer = new FileWriter("d://testi.csv",true)) {
+
+                try (FileWriter writer = new FileWriter("d://testi.csv", true)) {
                     // heittää current daten listalle
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     Date date = new Date();
 //                    dateFormat.format(date)+ ";"
-                 
-                   
-                    writer.append(nimiii +";" + desse.getPisteet() +";"  + "\n");
-                   
-                   
 
 
+                    writer.append(this.nimiii + ";" + desse.getPisteet() + ";" + "\n");
 
                     //generate whatever data you want
 
@@ -78,9 +76,7 @@ public class PisteLista {
                 }
             } catch (IOException e) {
             }
-           
 
-        
             String csvFile = "d:\\testi.csv";
             BufferedReader br = null;
             String line = "";
@@ -108,15 +104,11 @@ public class PisteLista {
 
 
 
+
+
     }
 
-      /**
-     *
-     * @return
-     */
     public List<Pisteet> getPisteet() {
         return pisteet;
     }
-
-  
 }

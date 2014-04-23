@@ -1,6 +1,5 @@
 package uusmatotesti;
 
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -34,9 +33,8 @@ public class Mato implements java.io.Serializable {
     private transient int safkay;
     private int pisteet = 0;
 
-
     public Mato() {
-        
+
         this.x = 320;
         this.y = 240;
         this.dx = 20;
@@ -273,8 +271,8 @@ public class Mato implements java.io.Serializable {
 
     public void Restarttti() {
     }
-    
-        public int getPisteet() {
+
+    public int getPisteet() {
         return pisteet;
     }
 
@@ -304,5 +302,4 @@ public class Mato implements java.io.Serializable {
         safka.safkaArpoja();
 
     }
-
 }
