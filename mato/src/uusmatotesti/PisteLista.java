@@ -5,10 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import static uusmatotesti.PisteKokeilu.NimiToPiste.getNimiToPisteet;
 
 /**
  * MATO
@@ -21,10 +23,9 @@ class Pisteet implements Comparable<Pisteet> {
 
     String nimi;
     int pisteeet;
-   private  List<Pisteet> pisteet = new ArrayList<>();
+    private List<Pisteet> pisteet = new ArrayList<>();
 
-  
-    public Pisteet(String nimi, int pisteet) {
+    public Pisteet(String nimi, int pisteeet) {
         this.nimi = nimi;
         this.pisteeet = pisteeet;
     }
@@ -38,9 +39,16 @@ class Pisteet implements Comparable<Pisteet> {
 public class PisteLista {
 
     private int pisteeet;
-     List<Pisteet> pisteet = new ArrayList<Pisteet>();
+    List<Pisteet> pisteet = new ArrayList<>();
+    private int testiintti;
+    private String nimiii;
 
     public PisteLista() {
+    }
+
+    public void luopistelista() {
+
+        this.nimiii = getNimiToPisteet();
         try {
             DeSerialisoitu desse = new DeSerialisoitu();
             try {
@@ -49,32 +57,25 @@ public class PisteLista {
                 Logger.getLogger(PisteLista.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            //        PisteetSerristä();
+
 
             try {
-                FileWriter writer = new FileWriter("d://testi.csv");
 
-                writer.append("TÄMÄONTESTI;" + desse.getPisteet());
+                try (FileWriter writer = new FileWriter("d://testi.csv", true)) {
+                    // heittää current daten listalle
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    Date date = new Date();
+//                    dateFormat.format(date)+ ";"
 
 
+                    writer.append(this.nimiii + ";" + desse.getPisteet() + ";" + "\n");
 
+                    //generate whatever data you want
 
-
-                //generate whatever data you want
-
-                writer.flush();
-                writer.close();
+                    writer.flush();
+                }
             } catch (IOException e) {
-                e.printStackTrace();
             }
-           
-
-            pisteet.add(new Pisteet("Sakarias", 123));
-            pisteet.add(new Pisteet("Sasdfas", 765));
-            pisteet.add(new Pisteet("Khjdhgfjs", 45));
-            pisteet.add(new Pisteet("ASDFas", 987));
-            pisteet.add(new Pisteet("AAPAOAPAPOPAO", 34));
-            pisteet.add(new Pisteet("Lojnhibt", 1));
 
             String csvFile = "d:\\testi.csv";
             BufferedReader br = null;
@@ -103,11 +104,11 @@ public class PisteLista {
 
 
 
+
+
     }
 
-      public List<Pisteet> getPisteet() {
+    public List<Pisteet> getPisteet() {
         return pisteet;
     }
-
-  
 }

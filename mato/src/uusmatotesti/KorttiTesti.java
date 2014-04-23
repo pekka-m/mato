@@ -14,7 +14,6 @@ import javax.swing.JFrame;
  * @author H3173
  */
 public class KorttiTesti extends javax.swing.JFrame {
-    ParasTestiNevö nevö = new ParasTestiNevö();
 
 
     /**
@@ -152,14 +151,12 @@ public class KorttiTesti extends javax.swing.JFrame {
         // TODO add your handling code here:
         CardLayout cl = (CardLayout)(jPanel3.getLayout());
         cl.next(jPanel3);
-        nevö.setLammas();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         CardLayout cl = (CardLayout)(jPanel3.getLayout());
         cl.next(jPanel3);
-        nevö.setLammas();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void näyttö1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_näyttö1KeyPressed
